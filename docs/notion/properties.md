@@ -38,9 +38,9 @@ Rental fields are hidden in every view and on the record page (page layout visib
 
 The Acquisitions page also has a linked Pipeline board.
 
-## Manual step
+## Board setting
 
-The Notion MCP view DSL cannot turn off "Hide empty groups" on a board. On both Pipeline boards (the database tab and the Acquisitions linked view), open the view's Group settings and turn **Hide empty groups** off, so all 10 stages show even when empty.
+Both Pipeline boards (the database tab and the Acquisitions linked view) have **Hide empty groups** turned off, so all 10 stages show even when empty. The Notion MCP view DSL cannot set this, so it was done by hand in the Notion UI; boards created later through the MCP need the same step.
 
 ## Not built yet
 
