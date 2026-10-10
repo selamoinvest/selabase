@@ -25,3 +25,11 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Pass Reason**: why a Property is Passed or Lost. Exactly one of: Price, Rehab Too Heavy, Location, Title, Lost to Other Buyer. Notion cannot make it mandatory; the "Missing Pass Reason" data-quality view catches gaps.
 - **Data-quality view**: a filtered view that lists records breaking a rule Notion cannot enforce. It should be empty.
 - **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
+
+## CRM
+
+- **Contact**: one person in the Contacts database. A person with several **Roles** (for example Contractor and Hire Candidate) is still one Contact.
+- **Company**: one business in the Companies database (contractor, lender, title company, etc.). Contacts link to it through Company.
+- **Hiring Stage**: where a Hire Candidate is in hiring. Exactly one of: Sourced, Screening, Interview, Trial, Hired, Rejected.
+- **Company Status**: how far a Company is vetted. Exactly one of: Prospect, Vetted, Preferred, Do Not Use.
+- **COI**: certificate of insurance. **COI Expiration** drives the "COI expiring" view, which lists Companies whose COI expires within about 30 days (or already has).
