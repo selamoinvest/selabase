@@ -21,6 +21,7 @@ Built for issue #3. Lives in the Databases page of the "REI Operating System" te
 | Deal | Lead Source | select | MLS, Wholesaler, Direct Mail, Driving for Dollars, LRA, Tax Sale, Referral |
 | Deal | Niche Grade | select | A+, A, A-, B+, B, B-, C+, C, C-, D+, D, D-, F |
 | Deal | Buy Box | relation → Buy Box (two-way, synced as Buy Box › Properties) | One version; see `assumptions-and-buy-box.md` |
+| Deal | Underwriting | relation → Underwriting (two-way, synced as Underwriting › Property) | Scenarios; see `underwriting.md` |
 | Media | Photos, Documents | files | |
 | Rental (hidden) | Market Rent, Actual Rent | number ($) | |
 | Rental (hidden) | Lease End | date | |
@@ -48,5 +49,5 @@ Both Pipeline boards (the database tab and the Acquisitions linked view) have **
 These depend on databases from later issues and are added with them:
 
 - Buy Box Fit (formula)
-- Relations to Underwriting, Projects, Tasks and Knowledge
+- Relations to Projects, Tasks and Knowledge
 - The roll-up that counts Selected scenarios

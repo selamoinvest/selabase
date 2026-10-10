@@ -19,6 +19,7 @@ Built for issue #5. Both live in the Databases page of the "REI Operating System
 | Rehab Contingency % | number (%) | % of rehab |
 | LTC Purchase % | number (%) | Loan-to-cost on purchase |
 | LTC Rehab % | number (%) | Loan-to-cost on rehab |
+| Underwriting | relation (synced from Underwriting › Assumptions) | |
 
 Percent fields store fractions (3% is stored as 0.03), which is what the Underwriting formulas multiply by.
 
@@ -50,6 +51,7 @@ Percent fields store fractions (3% is stored as 0.03), which is what the Underwr
 | Min Net Profit | number ($) | Fully loaded Net Profit |
 | Min Profit % of ARV | number (%) | Fully loaded Net Profit as % of ARV |
 | Properties | relation (synced from Properties › Buy Box) | |
+| Underwriting | relation (synced from Underwriting › Buy Box) | |
 
 ### v1
 
@@ -70,7 +72,7 @@ Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties
 
 ## Not built yet
 
-- Underwriting relation to Assumptions, and the database templates that prefill the Active Assumptions record and Active Buy Box (issue for Underwriting).
+- The Underwriting template that prefills the Active Assumptions record and Active Buy Box is a manual step; see `underwriting.md`.
 - Buy Box Fit formula on Properties (needs Underwriting for the SOW and profit criteria).
 - Notion cannot enforce "only one Active". There is no data-quality view for it yet; the Active views above show more than one row if it happens.
 
