@@ -24,6 +24,8 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Pipeline**: the board view of Properties grouped by Stage.
 - **Pass Reason**: why a Property is Passed or Lost. Exactly one of: Price, Rehab Too Heavy, Location, Title, Lost to Other Buyer. Notion cannot make it mandatory; the "Missing Pass Reason" data-quality view catches gaps.
 - **Data-quality view**: a filtered view that lists records breaking a rule Notion cannot enforce. It should be empty.
+- **Assumptions record**: the one Active record in the Assumptions database that holds the central defaults (buy closing, selling, hard money rate and points, hold months, rehab contingency, loan-to-cost on purchase and rehab). Underwriting scenarios read their defaults from it.
+- **Buy Box**: our screening criteria (max price, max scope of work, allowed Niche Grades, min beds/baths/sq ft, min net profit and min profit % of ARV). It is versioned: each **Buy Box version** (for example "v1 – Oct 2026") is one record, and exactly one is **Active**. Each Property links to the version it is judged against.
 - **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
 
 ## CRM
