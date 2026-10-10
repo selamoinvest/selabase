@@ -61,6 +61,8 @@ Percent fields store fractions (3% is stored as 0.03), which is what the Underwr
 
 Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties), shown in the Deal section of the record page and in the All Properties view. Notion cannot limit it to one version; the Update Buy Box procedure keeps it to one.
 
+Properties judges itself against the linked version in the **Buy Box Fit** formula; see "Buy Box Fit" in `properties.md`.
+
 ## Views
 
 | Where | View | Purpose |
@@ -73,7 +75,6 @@ Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties
 ## Not built yet
 
 - The Underwriting template "New scenario" prefills the Active Assumptions record and Active Buy Box; see `underwriting.md`. It points at fixed records, so it must be updated when either changes.
-- Buy Box Fit formula on Properties (needs Underwriting for the SOW and profit criteria).
 - Notion cannot enforce "only one Active". There is no data-quality view for it yet; the Active views above show more than one row if it happens.
 
 ## Test records

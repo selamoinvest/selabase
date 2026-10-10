@@ -55,6 +55,8 @@ The Effective formula tests `length(format(Override)) > 0`, not `empty(Override)
 | MAO | ARV × 70% − Rehab |
 | Below Criteria | Checkbox: a Buy Box is linked, ARV > 0, and Net Profit < Min Net Profit or Profit % of ARV < Min Profit % of ARV |
 
+Four hidden formulas feed Buy Box Fit on Properties: Fit Purchase Price, Fit Rehab Estimate, Fit Net Profit and Fit Profit % of ARV each give the value when Selected is ticked, else 0. Properties sums them per property; see "Buy Box Fit" in `properties.md`.
+
 Dollar results are rounded to cents. Min Net Profit and Min Profit % of ARV are roll-ups from the linked Buy Box.
 
 The record page groups fields into Inputs, Results – Base, Results – Fully loaded, Assumptions and Buy Box criteria. Property, Selected and Below Criteria are pinned under the title.
