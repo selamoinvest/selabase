@@ -30,7 +30,7 @@ A new, structured Notion teamspace called **"REI Operating System"**. It has 11 
 - When a property goes **Under Contract**, a **Project** starts. The Project holds the milestone dates, the hard money loan data, the budget lines, the contractor bids and the tasks.
 - **Tasks**, **Contacts/Companies (CRM)** and a **Knowledge Base** link to properties and projects.
 - Claude reads the AI Operating Manual before it writes data. It follows a fixed vocabulary and documented procedures, and it never deletes records.
-- Existing data is inventoried, mapped, migrated after approval and archived (never deleted).
+- Existing data is inventoried, mapped, migrated after approval and archived (never deleted). Deferred: the system starts from scratch and migrates only if needed (see Further Notes).
 
 ## User Stories
 
@@ -374,3 +374,4 @@ A new, structured Notion teamspace called **"REI Operating System"**. It has 11 
 - Notion select fields create a new option when an unknown value is written. The AI Operating Manual's fixed vocabulary is the main protection against this.
 - According to secondary sources, the hosted Notion MCP does not expose a delete tool today. This can change, so the "no delete" rule stays in the AI Operating Manual.
 - The system has fewer than 10 existing properties, so the migration is small and can be done in one session.
+- **Migration is deferred (decided 2026-10-10).** The old workspace holds little data, so the new system starts from scratch. Migration (#21) runs only if it turns out to be needed once the new system is ready.

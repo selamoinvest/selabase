@@ -26,6 +26,18 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Data-quality view**: a filtered view that lists records breaking a rule Notion cannot enforce. It should be empty.
 - **Assumptions record**: the one Active record in the Assumptions database that holds the central defaults (buy closing, selling, hard money rate and points, hold months, rehab contingency, loan-to-cost on purchase and rehab). Underwriting scenarios read their defaults from it.
 - **Buy Box**: our screening criteria (max price, max scope of work, allowed Niche Grades, min beds/baths/sq ft, min net profit and min profit % of ARV). It is versioned: each **Buy Box version** (for example "v1 – Oct 2026") is one record, and exactly one is **Active**. Each Property links to the version it is judged against.
+- **Buy Box Fit**: the formula on each Property that checks it against its Buy Box version. It reads "Fits", "Fits (physical) – not underwritten" (no Selected scenario, physical criteria pass), or "Fails:" followed by the failed criteria (Price, SOW, Niche, Beds, Baths, Sq Ft, Profit, Profit %).
+- **Physical criteria**: the Buy Box criteria that need no underwriting: Price (against Asking Price), Niche, Beds, Baths, Sq Ft.
+- **Scenario**: one record in the Underwriting database that analyzes one Property (for example "Flip – conservative ARV"). A Property can have several scenarios.
+- **Selected** scenario: the one scenario per Property whose numbers the team acts on. Notion cannot enforce "one"; the "More than one Selected" data-quality view catches extras.
+- **Freeze**: when a scenario is Selected, every Effective value is copied into its Override, so later changes to the Assumptions record do not change it. Unticking Selected does not unfreeze it.
+- **Base** result: Base Profit from hard numbers only (ARV − Purchase − Buy Closing − Rehab).
+- **Fully loaded** result: Net Profit after financing (points, interest), holding, rehab contingency and selling costs.
+- **Default / Override / Effective**: for each assumption, a scenario shows the **Default** (read from its Assumptions record), an optional **Override** typed on the scenario, and the **Effective** value the formulas use (the Override if filled in, else the Default).
+- **ARV**: after-repair value, the expected sale price after the rehab.
+- **MAO**: maximum allowable offer, ARV × 70% − Rehab.
+- **LTC**: loan-to-cost, the share of purchase or rehab the hard money lender funds.
+- **Below Criteria**: a scenario whose Fully loaded Net Profit is below its Buy Box's Min Net Profit or Min Profit % of ARV.
 - **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
 
 ## CRM

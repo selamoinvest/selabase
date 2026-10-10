@@ -19,6 +19,7 @@ Built for issue #5. Both live in the Databases page of the "REI Operating System
 | Rehab Contingency % | number (%) | % of rehab |
 | LTC Purchase % | number (%) | Loan-to-cost on purchase |
 | LTC Rehab % | number (%) | Loan-to-cost on rehab |
+| Underwriting | relation (synced from Underwriting › Assumptions) | |
 
 Percent fields store fractions (3% is stored as 0.03), which is what the Underwriting formulas multiply by.
 
@@ -50,6 +51,7 @@ Percent fields store fractions (3% is stored as 0.03), which is what the Underwr
 | Min Net Profit | number ($) | Fully loaded Net Profit |
 | Min Profit % of ARV | number (%) | Fully loaded Net Profit as % of ARV |
 | Properties | relation (synced from Properties › Buy Box) | |
+| Underwriting | relation (synced from Underwriting › Buy Box) | |
 
 ### v1
 
@@ -58,6 +60,8 @@ Percent fields store fractions (3% is stored as 0.03), which is what the Underwr
 ## Properties › Buy Box
 
 Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties), shown in the Deal section of the record page and in the All Properties view. Notion cannot limit it to one version; the Update Buy Box procedure keeps it to one.
+
+Properties judges itself against the linked version in the **Buy Box Fit** formula; see "Buy Box Fit" in `properties.md`.
 
 ## Views
 
@@ -70,8 +74,7 @@ Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties
 
 ## Not built yet
 
-- Underwriting relation to Assumptions, and the database templates that prefill the Active Assumptions record and Active Buy Box (issue for Underwriting).
-- Buy Box Fit formula on Properties (needs Underwriting for the SOW and profit criteria).
+- The Underwriting template "New scenario" prefills the Active Assumptions record and Active Buy Box; see `underwriting.md`. It points at fixed records, so it must be updated when either changes.
 - Notion cannot enforce "only one Active". There is no data-quality view for it yet; the Active views above show more than one row if it happens.
 
 ## Test records
