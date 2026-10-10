@@ -15,3 +15,13 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Databases page**: the one page that holds all 11 databases. Pillar pages show linked views of them; they never hold a database themselves.
 - **Archive – Legacy**: the page that old workspace pages are moved into after migration. Nothing is deleted.
 - **Claude account**: the dedicated company-email Notion member (4th seat) that Claude uses through the Notion MCP. No person works in Notion as this account.
+
+## Pipeline
+
+- **Property**: one record per physical house in the Properties database, titled by its full address (for example "1234 Main St, St. Louis, MO 63110"). It is permanent: it stays after the house is bought or sold.
+- **Stage**: where a Property is in the pipeline. Exactly one of: Lead, Analyzing, Walkthrough Scheduled, Offer Submitted, Negotiating, Under Contract, Owned, Sold, Passed, Lost.
+  - **Pre-contract** stages: Lead, Analyzing, Walkthrough Scheduled, Offer Submitted, Negotiating.
+- **Pipeline**: the board view of Properties grouped by Stage.
+- **Pass Reason**: why a Property is Passed or Lost. Exactly one of: Price, Rehab Too Heavy, Location, Title, Lost to Other Buyer. Notion cannot make it mandatory; the "Missing Pass Reason" data-quality view catches gaps.
+- **Data-quality view**: a filtered view that lists records breaking a rule Notion cannot enforce. It should be empty.
+- **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
