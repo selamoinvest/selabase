@@ -38,7 +38,7 @@ Rental fields are hidden in every view and on the record page (page layout visib
 | All Properties | table | Every property, rental fields hidden |
 | Pipeline | board | Grouped by Stage |
 | ⚠️ Missing Pass Reason | table | Stage is Passed or Lost and Pass Reason is empty. Should be empty. |
-| ⚠️ More than one Selected | table | Multiple Selected is checked (needs the manual filter step below). Should be empty. |
+| ⚠️ More than one Selected | table | Multiple Selected is checked. Should be empty. |
 | 🧪 TEST records | table | Address starts with "TEST –", for manual cleanup |
 
 The Acquisitions page also has a linked Pipeline board.
@@ -47,9 +47,9 @@ The Acquisitions page also has a linked Pipeline board.
 
 Both Pipeline boards (the database tab and the Acquisitions linked view) have **Hide empty groups** turned off, so all 10 stages show even when empty. The Notion MCP view DSL cannot set this, so it was done by hand in the Notion UI; boards created later through the MCP need the same step.
 
-## Manual step: "More than one Selected" filter
+## Formula and roll-up filters (manual)
 
-The Notion MCP view DSL drops filters on formula and roll-up properties without an error. The view was created with the stand-in filter "Underwriting is not empty", which lists every property that has a scenario. In the Notion UI, replace that filter with **Multiple Selected is checked**. Until then the view is not a data-quality view.
+The Notion MCP view DSL drops filters on formula and roll-up properties without an error. The "More than one Selected" filter (**Multiple Selected is checked**) was therefore set by hand in the Notion UI (done). Views created later through the MCP that filter on a formula or roll-up need the same step. A filter edited on a shared view must be saved with "Save for everyone", or it stays private to the editor.
 
 ## Not built yet
 

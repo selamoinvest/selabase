@@ -120,7 +120,8 @@ Not yet verified for issue #7, because the workspace hit its Query Data Source u
 
 - Fixture A results after the freeze (Net Profit 36,400 and the rest of the Fixture A table).
 - Fixture C on Fixture A: set the central Selling % to 7%, check that A stays at 36,400 (and A2 moves to 39,600), then restore 8%. Not run, so the central record still holds 8%.
-- Fixture F3, part 1: the property shows Selected Scenarios = 2 and appears in "⚠️ More than one Selected".
+
+Fixture F3, part 1, is verified: a view-mode query of "⚠️ More than one Selected" (view mode applies the view's own filter and does not count toward the query limit) returned only the F3 property. "TEST – Underwriting fixtures A2 B C", which has scenarios but none Selected, was not returned.
 
 Part 2 of F3 (Claude asks before unticking) belongs to the AI Operating Manual.
 
