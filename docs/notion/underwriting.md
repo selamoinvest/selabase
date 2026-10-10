@@ -116,10 +116,10 @@ On the property "TEST – Select fixtures A F3, St. Louis, MO 63110" (Stage Anal
 | TEST – Fixture A (Selected, frozen) | 200k / 320k ARV / 35k rehab / 500 per month | Select Scenario run on it. All eight Overrides read back as 3%, 8%, 12%, 2%, 6, 0%, 70%, 100%, and Selected is ticked |
 | TEST – Fixture F3 (second Selected, ticked by hand) | 190k / 320k ARV / 35k rehab / 500 per month | Selected ticked by hand, no Overrides. The property now has two Selected scenarios |
 
-Not yet verified for issue #7, because the workspace hit its Query Data Source usage limit before any formula or roll-up could be read:
+The Query Data Source usage limit blocked Claude from reading formulas for issue #7, so a team member checked these by eye in the Notion UI:
 
-- Fixture A results after the freeze (Net Profit 36,400 and the rest of the Fixture A table).
-- Fixture C on Fixture A: set the central Selling % to 7%, check that A stays at 36,400 (and A2 moves to 39,600), then restore 8%. Not run, so the central record still holds 8%.
+- Fixture A after the freeze: Net Profit 36,400 and all eight Overrides filled.
+- Fixture C on Fixture A: with the central Selling % at 7%, A stayed at 36,400 and A2 moved to 39,600. Selling % was then restored, and Claude read it back as 0.08.
 
 Fixture F3, part 1, is verified: a view-mode query of "⚠️ More than one Selected" (view mode applies the view's own filter and does not count toward the query limit) returned only the F3 property. "TEST – Underwriting fixtures A2 B C", which has scenarios but none Selected, was not returned.
 
