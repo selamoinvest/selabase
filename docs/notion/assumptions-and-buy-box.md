@@ -72,7 +72,7 @@ Properties has a **Buy Box** relation (two-way, synced as Buy Box › Properties
 
 ## Not built yet
 
-- The Underwriting template that prefills the Active Assumptions record and Active Buy Box is a manual step; see `underwriting.md`.
+- The Underwriting template "New scenario" prefills the Active Assumptions record and Active Buy Box; see `underwriting.md`. It points at fixed records, so it must be updated when either changes.
 - Buy Box Fit formula on Properties (needs Underwriting for the SOW and profit criteria).
 - Notion cannot enforce "only one Active". There is no data-quality view for it yet; the Active views above show more than one row if it happens.
 
