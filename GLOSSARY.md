@@ -27,6 +27,8 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Assumptions record**: the one Active record in the Assumptions database that holds the central defaults (buy closing, selling, hard money rate and points, hold months, rehab contingency, loan-to-cost on purchase and rehab). Underwriting scenarios read their defaults from it.
 - **Buy Box**: our screening criteria (max price, max scope of work, allowed Niche Grades, min beds/baths/sq ft, min net profit and min profit % of ARV). It is versioned: each **Buy Box version** (for example "v1 – Oct 2026") is one record, and exactly one is **Active**. Each Property links to the version it is judged against.
 - **Scenario**: one record in the Underwriting database that analyzes one Property (for example "Flip – conservative ARV"). A Property can have several scenarios.
+- **Selected** scenario: the one scenario per Property whose numbers the team acts on. Notion cannot enforce "one"; the "More than one Selected" data-quality view catches extras.
+- **Freeze**: when a scenario is Selected, every Effective value is copied into its Override, so later changes to the Assumptions record do not change it. Unticking Selected does not unfreeze it.
 - **Base** result: Base Profit from hard numbers only (ARV − Purchase − Buy Closing − Rehab).
 - **Fully loaded** result: Net Profit after financing (points, interest), holding, rehab contingency and selling costs.
 - **Default / Override / Effective**: for each assumption, a scenario shows the **Default** (read from its Assumptions record), an optional **Override** typed on the scenario, and the **Effective** value the formulas use (the Override if filled in, else the Default).

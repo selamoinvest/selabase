@@ -22,6 +22,8 @@ Built for issue #3. Lives in the Databases page of the "REI Operating System" te
 | Deal | Niche Grade | select | A+, A, A-, B+, B, B-, C+, C, C-, D+, D, D-, F |
 | Deal | Buy Box | relation → Buy Box (two-way, synced as Buy Box › Properties) | One version; see `assumptions-and-buy-box.md` |
 | Deal | Underwriting | relation → Underwriting (two-way, synced as Underwriting › Property) | Scenarios; see `underwriting.md` |
+| Deal | Selected Scenarios | roll-up (count checked) of Underwriting › Selected | Should be 0 or 1 |
+| Deal | Multiple Selected | formula: `Selected Scenarios > 1` (checkbox) | Hidden on the record page; drives the view below |
 | Media | Photos, Documents | files | |
 | Rental (hidden) | Market Rent, Actual Rent | number ($) | |
 | Rental (hidden) | Lease End | date | |
@@ -36,6 +38,7 @@ Rental fields are hidden in every view and on the record page (page layout visib
 | All Properties | table | Every property, rental fields hidden |
 | Pipeline | board | Grouped by Stage |
 | ⚠️ Missing Pass Reason | table | Stage is Passed or Lost and Pass Reason is empty. Should be empty. |
+| ⚠️ More than one Selected | table | Multiple Selected is checked (needs the manual filter step below). Should be empty. |
 | 🧪 TEST records | table | Address starts with "TEST –", for manual cleanup |
 
 The Acquisitions page also has a linked Pipeline board.
@@ -44,10 +47,13 @@ The Acquisitions page also has a linked Pipeline board.
 
 Both Pipeline boards (the database tab and the Acquisitions linked view) have **Hide empty groups** turned off, so all 10 stages show even when empty. The Notion MCP view DSL cannot set this, so it was done by hand in the Notion UI; boards created later through the MCP need the same step.
 
+## Manual step: "More than one Selected" filter
+
+The Notion MCP view DSL drops filters on formula and roll-up properties without an error. The view was created with the stand-in filter "Underwriting is not empty", which lists every property that has a scenario. In the Notion UI, replace that filter with **Multiple Selected is checked**. Until then the view is not a data-quality view.
+
 ## Not built yet
 
 These depend on databases from later issues and are added with them:
 
 - Buy Box Fit (formula)
 - Relations to Projects, Tasks and Knowledge
-- The roll-up that counts Selected scenarios

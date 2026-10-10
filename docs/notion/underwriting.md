@@ -18,7 +18,7 @@ Write inputs and overrides only. Every Default is a roll-up and every Effective 
 | Assumptions | relation → Assumptions (two-way, synced as Assumptions › Underwriting) | The Active record |
 | Buy Box | relation → Buy Box (two-way, synced as Buy Box › Underwriting) | The Active version |
 | Exit Strategy | select | Flip, Rental (Rental formulas are not built) |
-| Selected | checkbox | Freeze and one-per-property come with issue #7 |
+| Selected | checkbox | The scenario the team acts on; one per property. See "Select a scenario" below |
 | Purchase Price, ARV, Rehab Estimate, Monthly Holding Cost | number ($) | Monthly Holding Cost has no default |
 
 ### Assumptions (Default / Override / Effective)
@@ -59,6 +59,20 @@ Dollar results are rounded to cents. Min Net Profit and Min Profit % of ARV are 
 
 The record page groups fields into Inputs, Results – Base, Results – Fully loaded, Assumptions and Buy Box criteria. Property, Selected and Below Criteria are pinned under the title.
 
+## Select a scenario (freeze)
+
+Built for issue #7. Notion has no trigger the MCP can set up, so freezing is a step in the Select Scenario procedure, not an automation:
+
+1. If another scenario on the same Property is Selected, ask before unticking it (it holds agreed numbers).
+2. Copy every Effective value into its Override field. An Override that is already filled in is the Effective value, so leave it as it is. For each empty Override, the Effective value is the Default, which is the value on the linked Assumptions record: read it from that record (fetch returns plain numbers, unlike the formulas) and write it to the Override.
+3. Tick Selected.
+
+After this, the scenario's Effective values come from its own Overrides, so a change to the central Assumptions record does not change its results. Unticking Selected does not clear the Overrides; clearing them is a deliberate manual action.
+
+Ticking Selected by hand in Notion does not freeze. Only the procedure does.
+
+Each Property counts its Selected scenarios; see "Selected Scenarios" in `properties.md`.
+
 ## Why roll-ups, not formulas through the relation
 
 The spec says formulas read values through relations. The Notion API refuses `prop("Assumptions").first().prop("Selling %")` with "Type error with formula", so the Defaults are roll-ups (sum over the one linked record) and the formulas read the roll-ups. The result is the same as long as a scenario links exactly one Assumptions record and one Buy Box version.
@@ -95,6 +109,19 @@ On the property "TEST – Underwriting fixtures A2 B C, St. Louis, MO 63110" (St
 
 Fixture C: with the central Selling % set to 7%, A2 showed Net Profit 39,600 and B stayed at 42,800. Selling % was then restored to 8% and read back as 0.08. The A2 check after the restore (back to 36,400) did not run because the workspace hit its query usage limit. The value is the same as the first A2 check.
 
-Fixture A (Selected, frozen) belongs to issue #7.
+On the property "TEST – Select fixtures A F3, St. Louis, MO 63110" (Stage Analyzing, Niche B, 3 bd / 1 ba / 1,100 sq ft, Buy Box v1), built for issue #7:
+
+| Scenario | Inputs | State |
+|---|---|---|
+| TEST – Fixture A (Selected, frozen) | 200k / 320k ARV / 35k rehab / 500 per month | Select Scenario run on it. All eight Overrides read back as 3%, 8%, 12%, 2%, 6, 0%, 70%, 100%, and Selected is ticked |
+| TEST – Fixture F3 (second Selected, ticked by hand) | 190k / 320k ARV / 35k rehab / 500 per month | Selected ticked by hand, no Overrides. The property now has two Selected scenarios |
+
+Not yet verified for issue #7, because the workspace hit its Query Data Source usage limit before any formula or roll-up could be read:
+
+- Fixture A results after the freeze (Net Profit 36,400 and the rest of the Fixture A table).
+- Fixture C on Fixture A: set the central Selling % to 7%, check that A stays at 36,400 (and A2 moves to 39,600), then restore 8%. Not run, so the central record still holds 8%.
+- Fixture F3, part 1: the property shows Selected Scenarios = 2 and appears in "⚠️ More than one Selected".
+
+Part 2 of F3 (Claude asks before unticking) belongs to the AI Operating Manual.
 
 A team member deletes these by hand when they are no longer needed.
