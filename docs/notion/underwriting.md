@@ -125,6 +125,6 @@ The Query Data Source usage limit blocked Claude from reading formulas for issue
 
 Fixture F3, part 1, is verified: a view-mode query of "⚠️ More than one Selected" (view mode applies the view's own filter and does not count toward the query limit) returned only the F3 property. "TEST – Underwriting fixtures A2 B C", which has scenarios but none Selected, was not returned.
 
-Part 2 of F3 (Claude asks before unticking) belongs to the AI Operating Manual.
+Part 2 of F3 (Claude asks before unticking) is covered by the Select Scenario procedure in the AI Operating Manual (issue #10).
 
 A team member deletes these by hand when they are no longer needed.

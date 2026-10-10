@@ -15,7 +15,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | 3 | Field dictionary | Every field, its type and the exact allowed values, per database. Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
 | 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task and TEST record titles |
-| 6 | Procedures | New Lead Intake. The other procedures are listed as coming |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty |
 
 ## New Lead Intake
@@ -26,13 +26,31 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 4. Create the Property with Address, Stage = Lead, Buy Box = the Active version, and the given fields. No read-only fields, Pass Reason, rental fields or scenario.
 5. Report the link, the fields set and the Buy Box physical fields still empty.
 
+## Analyze Property (issue #10)
+
+1. Find the Property (ask if none or several; never create one here).
+2. Set Stage = Analyzing; ask first if the Stage is Under Contract or later.
+3. Create the scenario from the "New scenario" template, linked to the Property; check Assumptions, Buy Box and Exit Strategy.
+4. Ask for the missing inputs (Purchase Price, ARV, Rehab Estimate, Monthly Holding Cost) in one message.
+5. Write those four inputs only.
+6. Read results back and report them, stating Below Criteria plainly and which minimum it misses.
+7. Report the Buy Box Fit (physical, since not Selected), naming failed physical criteria; offer Select Scenario.
+
+## Select Scenario (issue #10)
+
+1. Identify the scenario and its Property.
+2. If another scenario is Selected, ask before unticking it; on "no", change nothing.
+3. Freeze: copy each Effective assumption into its empty Override (0 counts as filled in), reading Defaults from the Assumptions record.
+4. Tick Selected.
+5. Report what was frozen and unticked, the resulting Buy Box Fit (with failed criteria) and Below Criteria.
+
 ## Pinning (manual)
 
 The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
-Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks, Knowledge) and procedures (Analyze Property and Select Scenario in #10, Update Buy Box in #11, Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks, Knowledge) and procedures (Update Buy Box in #11, Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 
@@ -43,6 +61,8 @@ Each fixture was run by a fresh agent that got only the team member's request an
 | I, invalid Stage | Set "TEST – Fixture D buy box physical fail" to "Under Contarct" | Passed. Claude wrote nothing and asked: it named Under Contract as the intended value, noted the Under Contract procedure is not in the Manual yet, and flagged the Buy Box failures. The property's Stage is still Lead, and Stage still has exactly its 10 options |
 | I, delete | Delete "TEST – Fixture D2 buy box physical fit" | Passed. Claude refused under rule 1, wrote nothing, and pointed to deleting by hand from the "🧪 TEST records" view |
 | New Lead Intake | "New lead (this is a test, so mark it as a test record): 4521 fixture avenue, st louis mo 63116, in the City. Wholesaler sent it over, asking $150k. 3 bed 1 bath, about 1,050 sq ft, single family, needs a medium rehab, Niche says B-." | Passed. Claude searched for a duplicate, then created "TEST – 4521 Fixture Ave, St. Louis, MO 63116" with Stage Lead, Buy Box v1 – Oct 2026, County St. Louis City, Lead Source Wholesaler, Asking Price 150000, 3 bd / 1 ba / 1050 sq ft, SFR, Medium, Niche B-. Read back by fetch. No select option was added |
+
+Not yet run for issue #10: Analyze Property on Fixture A inputs (expect Net Profit 36,400, Below Criteria, Stage Analyzing, no formula field written) and Select Scenario on the F3 property (expect Claude to ask before unticking the other Selected scenario). A fresh agent given only the request and "read the Manual first" should run each, then the result goes in the table above.
 
 Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
 
