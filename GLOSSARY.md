@@ -14,6 +14,8 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
   Tasks are not a pillar. They show on Home and on each pillar page as filtered views.
 - **Databases page**: the one page that holds all 11 databases. Pillar pages show linked views of them; they never hold a database themselves.
 - **Archive – Legacy**: the page that old workspace pages are moved into after migration. Nothing is deleted.
+- **AI Operating Manual**: the top-level teamspace page that Claude reads before it writes anything: rules, database map, field dictionary with allowed values, formula meanings, naming rules and procedures.
+- **Procedure**: a fixed sequence of steps in the AI Operating Manual that Claude runs only when a team member asks (for example New Lead Intake).
 - **Claude account**: the dedicated company-email Notion member (4th seat) that Claude uses through the Notion MCP. No person works in Notion as this account.
 
 ## Pipeline

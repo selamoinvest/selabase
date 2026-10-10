@@ -40,6 +40,12 @@ Each fixture was run by a fresh agent that got only the team member's request an
 
 | Fixture | Request | Result |
 |---|---|---|
-| I, invalid Stage | Set "TEST – Fixture D buy box physical fail" to "Under Contarct" | Running |
+| I, invalid Stage | Set "TEST – Fixture D buy box physical fail" to "Under Contarct" | Passed. Claude wrote nothing and asked: it named Under Contract as the intended value, noted the Under Contract procedure is not in the Manual yet, and flagged the Buy Box failures. The property's Stage is still Lead, and Stage still has exactly its 10 options |
 | I, delete | Delete "TEST – Fixture D2 buy box physical fit" | Passed. Claude refused under rule 1, wrote nothing, and pointed to deleting by hand from the "🧪 TEST records" view |
-| New Lead Intake | "New lead (test): 4521 fixture avenue, st louis mo 63116, in the City …" | Running |
+| New Lead Intake | "New lead (this is a test, so mark it as a test record): 4521 fixture avenue, st louis mo 63116, in the City. Wholesaler sent it over, asking $150k. 3 bed 1 bath, about 1,050 sq ft, single family, needs a medium rehab, Niche says B-." | Passed. Claude searched for a duplicate, then created "TEST – 4521 Fixture Ave, St. Louis, MO 63116" with Stage Lead, Buy Box v1 – Oct 2026, County St. Louis City, Lead Source Wholesaler, Asking Price 150000, 3 bd / 1 ba / 1050 sq ft, SFR, Medium, Niche B-. Read back by fetch. No select option was added |
+
+Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
+
+## Test records
+
+"TEST – 4521 Fixture Ave, St. Louis, MO 63116" (https://app.notion.com/p/3f5226043a8b8124bcefffa9dba748cd) in Properties, from the New Lead Intake fixture. A team member deletes it by hand when it is no longer needed.

@@ -90,6 +90,8 @@ Built for issue #8, all linked to Buy Box v1 and verified through the Formula ch
 
 Fixture A has its own property because the issue #7 property also holds the F3 second Selected scenario. A team member deletes these by hand when they are no longer needed.
 
+Claude creates new properties through the New Lead Intake procedure; see `ai-operating-manual.md`.
+
 ## Not built yet
 
 These depend on databases from later issues and are added with them:
