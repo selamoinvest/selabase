@@ -28,7 +28,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 
 ## Pinning (manual)
 
-The Notion MCP cannot pin or reorder sidebar pages. The page sits at the top level of the teamspace and is linked from Home. To pin it, drag it to the top of the teamspace sidebar in the Notion UI; each team member can also add it to Favorites.
+The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
