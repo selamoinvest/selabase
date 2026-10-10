@@ -128,3 +128,5 @@ Fixture F3, part 1, is verified: a view-mode query of "⚠️ More than one Sele
 Part 2 of F3 (Claude asks before unticking) is covered by the Select Scenario procedure in the AI Operating Manual (issue #10).
 
 A team member deletes these by hand when they are no longer needed.
+
+Issue #10: the yes path of F3 was run on this property. Fixture F3 is now Selected and frozen (Net Profit 47,260 by hand) and Fixture A is unselected.
