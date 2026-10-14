@@ -17,6 +17,7 @@ Built for issue #13. Lives in the Databases page of the "REI Operating System" t
 | External Party | relation → Contacts (two-way, synced as Contacts › Tasks) | The contractor, agent etc. we wait on |
 | Property | relation → Properties (two-way, synced as Properties › Tasks) | |
 | Project | relation → Projects (two-way, synced as Projects › Tasks) | |
+| Knowledge | relation → Knowledge (synced side of Knowledge › Tasks, #16) | The note or SOP the task came from. Set from the Knowledge side |
 
 Status is a Notion status field, not a select, so Done and Cancelled count as complete in Notion's own task features.
 
@@ -44,6 +45,5 @@ The Property's Tasks field and the Project's Tasks field each list all three. De
 ## Not built yet
 
 - **Recurring tasks** (manual): the Notion MCP cannot create database templates or set their repeat schedule. A team member makes each recurring task a template in the Notion UI (New ▾ → New template) and sets "Repeat" on it. Claude does not recreate recurring tasks.
-- The Knowledge relation, added with the Knowledge database.
 - Tasks linked views on Home and each pillar page.
 - The AI Operating Manual (database map, field dictionary) does not yet list Tasks; update it with the Under Contract procedure (#17), which creates the due-diligence tasks.

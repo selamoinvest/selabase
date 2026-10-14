@@ -1,0 +1,61 @@
+# Knowledge database
+
+Built for issue #16. Lives in the Databases page of the "REI Operating System" teamspace.
+
+- Database: https://app.notion.com/p/4309663ce6cc43dbb55d16ce85e8cbbc
+- Data source: `collection://64f7ba25-46f0-4e98-9052-29d84db83a53`
+
+## Schema
+
+| Field | Type | Allowed values |
+|---|---|---|
+| Title | title | Meeting Note "[YYYY-MM-DD] – [topic]"; Glossary Term: the term itself, for example "ARV" |
+| Type | select | Meeting Note, Course/Lesson, Glossary Term, SOP, Market Research |
+| Summary | text | One or two lines; for a Glossary Term, the definition |
+| Date | date | Meeting, lesson or research date |
+| Source | URL | Link to the course, recording or report |
+| Properties | relation → Properties (two-way, synced as Properties › Knowledge) | |
+| Projects | relation → Projects (two-way, synced as Projects › Knowledge) | |
+| Contacts | relation → Contacts (two-way, synced as Contacts › Knowledge) | |
+| Tasks | relation → Tasks (two-way, synced as Tasks › Knowledge) | Action items made from the entry |
+
+The full text (notes, lesson content, SOP steps) goes in the page body.
+
+## Views
+
+| View | Type | Purpose |
+|---|---|---|
+| All Knowledge | table | Every entry, grouped by Type, newest Date first |
+| 📖 Glossary | table | `Type = Glossary Term`, A–Z, Title and Summary only |
+| 📝 Meeting Notes | table | `Type = Meeting Note`, newest first, with the links |
+| 🧪 TEST records | table | Title starts with "TEST –", for deleting by hand |
+
+## Glossary entries
+
+ARV, MAO, LTC, EMD and COI, each a Glossary Term with its definition in Summary. The definitions match `GLOSSARY.md`; MAO and LTC also match the Underwriting formulas and Assumptions defaults.
+
+## Test records
+
+| Record | Links |
+|---|---|
+| TEST – 2026-10-14 – Walkthrough debrief 4521 Fixture Ave (Meeting Note) | Property "TEST – 4521 Fixture Ave", Project "TEST – 4521 Fixture – Flip Rehab – 2026-10 (10 days)", Contact "TEST – Multi-role person", Task "TEST – Order inspection" |
+
+Checked 2026-10-14 through the Notion MCP:
+
+| Check | Result |
+|---|---|
+| Before the build, no Knowledge database existed (search of the Databases page) | Red |
+| Fetching the property, the project, the task and the contact: each one's Knowledge field lists the meeting note | Pass |
+| The 📖 Glossary view, queried in view mode, returns exactly ARV, COI, EMD, LTC, MAO | Pass |
+| The 🧪 TEST records view returns only the meeting note | Pass |
+
+The glossary terms are real entries, not test records. Delete the meeting note by hand when no longer needed.
+
+## AI Operating Manual
+
+Updated in the same issue: Knowledge in the database map (section 2), a Knowledge field dictionary with a pointer to the 📖 Glossary view (section 3), Knowledge relation rows on Properties and Contacts, and a Knowledge naming rule (section 5).
+
+## Not built yet
+
+- The Process Meeting Notes procedure (#18): Claude turns a meeting note's action items into Tasks linked back to the note.
+- A Knowledge linked view on the Knowledge pillar page.

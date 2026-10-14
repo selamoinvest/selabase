@@ -64,9 +64,12 @@ Fixture for issue #12, all linked to "TEST – 4521 Fixture Ave" (checked 2026-1
 
 The Property's Projects field lists all three. The test records are dated relative to 2026-10-14; the 14-day view will stop showing them as time passes. Delete by hand when no longer needed.
 
+## Relations added by later issues
+
+Tasks were added in #13, Budget Lines and the budget roll-ups in #14, Bids in #15 and the Knowledge relation in #16.
+
 ## Not built yet
 
-- The relation from Knowledge, added with that database (Tasks added in #13, Budget Lines and the budget roll-ups in #14, Bids in #15).
 - A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.
 - The AI Operating Manual (database map, field dictionary, naming rules) does not yet list Projects; update it with the Under Contract procedure (#17).

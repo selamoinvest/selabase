@@ -47,9 +47,9 @@ The spec does not list Trades or Rating values; the Trades list and the 1–5 Ra
 
 The Notion view DSL only offers "one month from now" as a relative date, so "30 days" is approximated as one month.
 
-## Not built yet
+## Relations added by later issues
 
-- The relation from Knowledge, added with that database. Projects (Lender) was added in #12, Tasks (External Party) in #13, Budget Lines (Vendor) in #14 and Bids (Company) in #15.
+Projects (Lender) was added in #12, Tasks (External Party) in #13, Budget Lines (Vendor) in #14, Bids (Company) in #15 and Knowledge (Contacts › Knowledge) in #16.
 
 ## Test records
 

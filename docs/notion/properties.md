@@ -94,8 +94,6 @@ Fixture A has its own property because the issue #7 property also holds the F3 s
 
 Claude creates new properties through the New Lead Intake procedure; see `ai-operating-manual.md`.
 
-## Not built yet
+## Relations added by later issues
 
-These depend on databases from later issues and are added with them:
-
-- Relation to Knowledge (Projects added in #12, Tasks in #13)
+Projects (#12), Tasks (#13) and Knowledge (#16) are two-way relations whose Property side is synced. Set them from the other database.

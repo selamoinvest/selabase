@@ -11,10 +11,10 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | # | Section | Holds |
 |---|---|---|
 | 1 | Rules | Never delete or archive; never create a new select option; write inputs only; never change a Selected scenario's numbers without approval; do not change the schema; ask when unsure; run procedures only when asked |
-| 2 | Database map | The six databases built so far, what one record is, and every relation with its synced side; the current Active Assumptions and Buy Box records |
-| 3 | Field dictionary | Every field, its type and the exact allowed values, per database. Formula, roll-up and synced fields are marked read-only |
+| 2 | Database map | The seven databases built so far (Knowledge added in #16), what one record is, and every relation with its synced side; the current Active Assumptions and Buy Box records |
+| 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16). Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
-| 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task and TEST record titles |
+| 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task, Knowledge and TEST record titles |
 | 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty |
 
@@ -64,7 +64,7 @@ The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it i
 
 ## Keeping it current
 
-Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks, Knowledge) and procedures (Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks; Knowledge was added in #16) and procedures (Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 

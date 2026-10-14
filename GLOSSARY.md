@@ -39,6 +39,7 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **ARV**: after-repair value, the expected sale price after the rehab.
 - **MAO**: maximum allowable offer, ARV × 70% − Rehab.
 - **LTC**: loan-to-cost, the share of purchase or rehab the hard money lender funds.
+- **EMD**: earnest money deposit, paid after the contract is signed and credited at closing.
 - **Below Criteria**: a scenario whose Fully loaded Net Profit is below its Buy Box's Min Net Profit or Min Profit % of ARV.
 - **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
 
@@ -60,3 +61,9 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Hiring Stage**: where a Hire Candidate is in hiring. Exactly one of: Sourced, Screening, Interview, Trial, Hired, Rejected.
 - **Company Status**: how far a Company is vetted. Exactly one of: Prospect, Vetted, Preferred, Do Not Use.
 - **COI**: certificate of insurance. **COI Expiration** drives the "COI expiring" view, which lists Companies whose COI expires within about 30 days (or already has).
+
+## Knowledge
+
+- **Knowledge entry**: one record in the Knowledge database. **Knowledge Type** is exactly one of: Meeting Note, Course/Lesson, Glossary Term, SOP, Market Research. An entry links to the Properties, Projects, Contacts and Tasks it is about, so it shows on their pages.
+- **Meeting Note**: a Knowledge entry titled "[YYYY-MM-DD] – [topic]". Its action items become Tasks linked back to it (Process Meeting Notes procedure).
+- **Glossary Term**: a Knowledge entry titled by the term (for example "ARV") whose Summary is the definition. The team and Claude use these definitions; the "📖 Glossary" view lists them.
