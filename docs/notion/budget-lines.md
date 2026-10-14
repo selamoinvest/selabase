@@ -14,7 +14,10 @@ Built for issue #14. Lives in the Databases page of the "REI Operating System" t
 | Cost Group | select | Acquisition, Rehab, Holding, Financing, Selling |
 | Category | select | Demo, Roof, HVAC, Electrical, Plumbing, Kitchen, Bath, Flooring, Paint, Exterior, Permits, Contingency. Rehab lines only |
 | Estimate | number ($) | Input |
-| Budgeted | formula (number) | Read-only. Today: `Estimate` |
+| Budgeted | formula (number) | Read-only. Accepted bid amount if one exists, else `Estimate` (see below) |
+| Budget Source | formula (text) | Read-only. "Accepted bid", "Estimate" or "More than one Accepted bid" |
+| Bids | relation → Bids (two-way, synced as Bids › Budget Line) | |
+| Accepted Bid Amount, Accepted Bids | roll-up over Bids (max of Accepted Amount; sum of Accepted Count) | Read-only helpers for Budgeted. Hidden from the views |
 | Actual | number ($) | Amount paid |
 | Variance | formula (number) | Read-only. `Budgeted − Actual`; negative means an overrun |
 | Vendor | relation → Companies (two-way, synced as Companies › Budget Lines) | Who was paid |
@@ -32,7 +35,7 @@ Write inputs only: nobody types into Budgeted or Variance.
 
 ## Budgeted
 
-The spec says Budgeted is the accepted bid amount if one exists, else the Estimate. The Bids database does not exist yet, so Budgeted is `Estimate` for now. When Bids is built (Fixture F2), change the formula to read the accepted bid through a roll-up on the Budget Line, then fall back to Estimate.
+Budgeted is the accepted bid amount if one exists, else the Estimate (#15): `if(Accepted Bids > 0, Accepted Bid Amount, Estimate)`. How the bid roll-ups work and the one-Accepted-bid rule are in `bids.md`.
 
 ## Project roll-ups
 
@@ -48,6 +51,7 @@ Why helper fields: the Notion API refuses formulas that read through a relation 
 | Budget Lines | ⚠️ Paid – no lien waiver | `Actual > 0` and Lien Waiver Received unchecked, sorted by Draw Funded |
 | Companies | ⚠️ Paid – no W-9 | Formula `Paid, No W-9 = Yes`: Total Paid > 0 and W-9 on File unchecked |
 | Projects | 💰 Budget vs Actual | Budgeted, Actual and Variance per Cost Group and in total |
+| Budget Lines | ⚠️ More than one Accepted bid | Data-quality view for #15, see `bids.md` |
 
 Companies has a **Total Paid** roll-up (sum of Actual over its Budget Lines) and the **Paid, No W-9** formula ("Yes" or "No"). The view filters on the formula because the view DSL treats roll-ups as text and does not allow `>` on them.
 
@@ -71,7 +75,7 @@ Checked 2026-10-14:
 | ⚠️ Paid – no lien waiver lists only "TEST – Roof (paid, no waiver)" (empty before the fixture) | Pass |
 | ⚠️ Paid – no W-9 lists only "TEST – Paid vendor, no W-9" (empty before the fixture; the W-9 vendor and the unpaid COI test companies do not show) | Pass |
 | Rehab Variance = 5,100 matches the Project; Rehab Variance = 5,101 matches nothing | Pass |
-| Line Budgeted = Estimate, line Variance, every Project roll-up and Variance, Companies Total Paid and Paid, No W-9 | Pass (checked by the user in the Notion UI) |
+| Line Budgeted = Estimate (before #15; these lines have no bids, so it still holds), line Variance, every Project roll-up and Variance, Companies Total Paid and Paid, No W-9 | Pass (checked by the user in the Notion UI) |
 
 The MCP returns `formulaResult://` and `rollupResult://` references instead of values, so the numbers were checked with filtered row queries until the workspace hit the Notion "Query Data Source" usage limit, then in the Notion UI. Delete the test records by hand when no longer needed.
 
@@ -81,7 +85,6 @@ The MCP returns `formulaResult://` and `rollupResult://` references instead of v
 
 ## Not built yet
 
-- Budgeted reading the accepted bid (Bids database, Fixture F2).
 - The Under Contract procedure (#17) creates the starting Budget Lines from the Selected scenario.
 - Budget Lines linked views on the Projects pillar page and on each Project page.
 - The AI Operating Manual (database map, field dictionary) does not yet list Budget Lines; update it with the Under Contract procedure (#17).

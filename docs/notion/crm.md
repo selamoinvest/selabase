@@ -34,6 +34,7 @@ One person with several roles is one Contact record with several Roles selected.
 | Budget Lines | relation (synced from Budget Lines › Vendor) | |
 | Total Paid | roll-up (sum of Budget Lines › Actual) | Read-only |
 | Paid, No W-9 | formula (text) | Read-only; "Yes" when Total Paid > 0 and W-9 on File is unchecked |
+| Bids | relation (synced from Bids › Company) | |
 
 The spec does not list Trades or Rating values; the Trades list and the 1–5 Rating scale are starting choices and can be edited.
 
@@ -48,7 +49,7 @@ The Notion view DSL only offers "one month from now" as a relative date, so "30 
 
 ## Not built yet
 
-- Relations from Bids and Knowledge, added with those databases. Projects (Lender) was added in #12, Tasks (External Party) in #13 and Budget Lines (Vendor) in #14.
+- The relation from Knowledge, added with that database. Projects (Lender) was added in #12, Tasks (External Party) in #13, Budget Lines (Vendor) in #14 and Bids (Company) in #15.
 
 ## Test records
 

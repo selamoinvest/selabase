@@ -47,7 +47,9 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Budget Line**: one cost item of a Project in the Budget Lines database (for example "Roof" or "Purchase"), with an Estimate, a Budgeted and an Actual amount.
 - **Cost Group**: the top-level bucket of a Budget Line. Exactly one of: Acquisition, Rehab, Holding, Financing, Selling.
 - **Category**: the standard rehab bucket of a Rehab line (Demo, Roof, HVAC, Electrical, Plumbing, Kitchen, Bath, Flooring, Paint, Exterior, Permits, Contingency), so budgets compare between projects.
-- **Budgeted**: the formula amount of a Budget Line: the accepted bid amount if one exists, else the Estimate. Nobody types into it.
+- **Bid**: one contractor quote in the Bids database, linked to one Project, one Company and one Budget Line. **Bid Status** is exactly one of: Requested, Received, Accepted, Rejected.
+- **Accepted bid**: the one bid per Budget Line with Status Accepted. Notion cannot enforce "one"; the "More than one Accepted bid" data-quality view catches extras.
+- **Budgeted**: the formula amount of a Budget Line: the accepted bid amount if one exists, else the Estimate. Nobody types into it. **Budget Source** says which one it is.
 - **Variance**: Budgeted − Actual. Negative means an overrun.
 - **Paid** line: a Budget Line whose Actual is more than 0. Paid lines need a lien waiver; their vendors need a W-9.
 

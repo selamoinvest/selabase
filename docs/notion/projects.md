@@ -24,6 +24,7 @@ Built for issue #12. Lives in the Databases page of the "REI Operating System" t
 | Deadlines | Next Deadline | formula (date) | Read-only |
 | Deadlines | Due in 14 Days | formula (text) | Read-only; "Yes" or "No" |
 | Budget | Budget Lines | relation → Budget Lines (two-way, synced as Budget Lines › Project) | |
+| Budget | Bids | relation → Bids (two-way, synced as Bids › Project) | |
 | Budget | Acquisition, Rehab, Holding, Financing, Selling, Total × Budgeted, Actual | roll-up (sum) | Read-only |
 | Budget | Acquisition, Rehab, Holding, Financing, Selling, Total × Variance | formula (number) | Read-only; Budgeted − Actual, negative means an overrun |
 
@@ -65,7 +66,7 @@ The Property's Projects field lists all three. The test records are dated relati
 
 ## Not built yet
 
-- Relations from Bids and Knowledge, added with those databases (Tasks added in #13, Budget Lines and the budget roll-ups in #14).
+- The relation from Knowledge, added with that database (Tasks added in #13, Budget Lines and the budget roll-ups in #14, Bids in #15).
 - A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.
 - The AI Operating Manual (database map, field dictionary, naming rules) does not yet list Projects; update it with the Under Contract procedure (#17).
