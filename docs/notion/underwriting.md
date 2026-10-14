@@ -91,7 +91,7 @@ The spec says formulas read values through relations. The Notion API refuses `pr
 
 The Notion MCP cannot do these:
 
-1. **Database template (done).** "New scenario" (https://app.notion.com/p/3f5226043a8b80b2a7edcb6e6e93622e, template ID `3f522604-3a8b-80b2-a7ed-cb6e6e93622e`) prefills Assumptions = "Defaults", Buy Box = "v1 – Oct 2026" and Exit Strategy = Flip, and is the default template. A default template applies when someone clicks New in Notion; when Claude creates a scenario through the MCP it passes this `template_id` or sets the two relations itself. When the Active Assumptions record or Buy Box version changes (Update Buy Box, issue #11), point the template at the new record.
+1. **Database template (done).** "New scenario" (https://app.notion.com/p/3f5226043a8b80b2a7edcb6e6e93622e, template ID `3f522604-3a8b-80b2-a7ed-cb6e6e93622e`) prefills Assumptions = "Defaults", Buy Box = the Active version (v2 – Oct 2026 since issue #11) and Exit Strategy = Flip, and is the default template. A default template applies when someone clicks New in Notion; when Claude creates a scenario through the MCP it passes this `template_id` or sets the two relations itself. When the Active Assumptions record or Buy Box version changes (Update Buy Box, issue #11), point the template at the new record.
 2. **Number formats on formulas.** Set the result formulas to Dollar, and the Effective %, Profit % of ARV and ROI formulas to Percent. The API cannot set formula formats, so they show as plain numbers until this is done.
 3. **Relation limits (optional).** Limit Property, Assumptions and Buy Box to 1 page each.
 

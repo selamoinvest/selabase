@@ -15,7 +15,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | 3 | Field dictionary | Every field, its type and the exact allowed values, per database. Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
 | 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task and TEST record titles |
-| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario. The other procedures are listed as coming |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty |
 
 ## New Lead Intake
@@ -44,13 +44,27 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 4. Tick Selected.
 5. Report what was frozen and unticked, the resulting Buy Box Fit (with failed criteria) and Below Criteria.
 
+## Update Buy Box (issue #11)
+
+1. Find the Active version (stop and ask if none or several).
+2. Get the changed criteria; copy the rest from the Active version and say so.
+3. Name it "v[n] – [Mon YYYY]".
+4. Create it with Active unchecked.
+5. List the pre-contract properties (Lead to Negotiating) linked to the old version; state that later stages stay; ask for a yes.
+6. After the yes, tick Active on the new version and untick it on the old.
+7. Set Buy Box to the new version on those properties and on their scenarios; write nothing else.
+8. Point the "New scenario" template at the new version and update the "Current Active records" line.
+9. Report the version, properties moved (with Buy Box Fit), properties left behind, and the template.
+
+Moving a scenario's Buy Box (step 7) is a choice made here, so Below Criteria reads the same criteria as Buy Box Fit. It changes no input or Override.
+
 ## Pinning (manual)
 
 The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
-Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks, Knowledge) and procedures (Update Buy Box in #11, Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks, Knowledge) and procedures (Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 
@@ -65,6 +79,8 @@ Each fixture was run by a fresh agent that got only the team member's request an
 | Select Scenario, F3 part 2 (#10) | "Select this scenario: TEST – Fixture F3 (second Selected, ticked by hand)" | Passed. Claude wrote nothing and asked before unticking Fixture A, noting that A holds agreed numbers, that the property showed "Check: more than one Selected", and what it would do after a yes. Then, after the team member's yes, the yes path was run (see the next row) |
 | Select Scenario, F3 yes path (#10) | Team member approved unticking Fixture A | Passed, but run by the main session, not a fresh agent: the fresh agent refused a yes relayed by another agent, as rule 4 intends. Fixture A unticked with its eight Overrides unchanged. F3's eight Overrides read back 0.03, 0.08, 0.12, 0.02, 6, 0, 0.7, 1 and Selected is ticked. "⚠️ More than one Selected" is empty. Buy Box Fit on the property reads "Fails: Profit %" (F3 Net Profit 47,260 by hand, 14.8% of ARV, under 15%). The Query Data Source limit blocked reading Net Profit and Below Criteria directly, so those two are hand-calculated and Buy Box Fit is the only formula value confirmed |
 
+| Update Buy Box, Fixture E (#11) | Run by the main session, not a fresh agent. Team member chose "move all 7" (8 pre-contract properties, 7 scenarios) | Passed. v2 – Oct 2026 created with Max Purchase Price $275,000 and the other v1 criteria, Active ticked, v1 unticked (exactly one Active). "TEST – Fixture E lead price fail" (Lead, asking $265,000) moved to v2 and now reads "Fits (physical) – not underwritten" (it failed Price on v1). "TEST – Fixture E passed stays on v1" (Passed, Pass Reason Price) stays on v1 and still fails Price. v1 lists only that property. "New scenario" template points at v2 |
+
 Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
 
 ## Test records
@@ -74,3 +90,5 @@ Buy Box Fit on the new lead was not read back (it should show "Fits (physical) �
 Issue #10 fixtures added "TEST – Flip – base case" (https://app.notion.com/p/3f5226043a8b81c2964ac7eb553e1a95) in Underwriting; the Fixture Ave property above is now Stage Analyzing. Delete by hand.
 
 After the yes-path run, "TEST – Select fixtures A F3" has Fixture F3 Selected and frozen, and Fixture A unselected. The "🧪 Formula check (Claude)" view filter is now `Buy Box Fit = "Fails: Profit %"`.
+
+Issue #11 added "TEST – Fixture E lead price fail, St. Louis, MO 63110" and "TEST – Fixture E passed stays on v1, St. Louis, MO 63110" in Properties. Delete by hand.

@@ -53,9 +53,17 @@ Percent fields store fractions (3% is stored as 0.03), which is what the Underwr
 | Properties | relation (synced from Properties › Buy Box) | |
 | Underwriting | relation (synced from Underwriting › Buy Box) | |
 
-### v1
+### Versions
+
+Only one version is Active. Old versions stay as history; properties past the pre-contract stages keep the version they were judged against. Created by the Update Buy Box procedure (see `ai-operating-manual.md`).
+
+### v1 (history, not Active since issue #11)
 
 "v1 – Oct 2026" (https://app.notion.com/p/3f5226043a8b813988a1e85392d2efba), Active: Max Purchase Price $250,000, Max Scope of Work $40,000, Allowed Niche Grades C+ / B- / B, Min Beds 3, Min Baths 1, Min Sq Ft 800, Min Net Profit $30,000, Min Profit % of ARV 15%.
+
+### v2
+
+"v2 – Oct 2026" (https://app.notion.com/p/3f9226043a8b818b8b1fd6510b0cff59), Active: Max Purchase Price $275,000; every other criterion as v1.
 
 ## Properties › Buy Box
 
@@ -74,7 +82,7 @@ Properties judges itself against the linked version in the **Buy Box Fit** formu
 
 ## Not built yet
 
-- The Underwriting template "New scenario" prefills the Active Assumptions record and Active Buy Box; see `underwriting.md`. It points at fixed records, so it must be updated when either changes.
+- The Underwriting template "New scenario" prefills the Active Assumptions record and Active Buy Box (now v2); see `underwriting.md`. It points at fixed records, so it must be updated when either changes. Update Buy Box does the Buy Box half.
 - Notion cannot enforce "only one Active". There is no data-quality view for it yet; the Active views above show more than one row if it happens.
 
 ## Test records
