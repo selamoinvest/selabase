@@ -71,9 +71,13 @@ Checked 2026-10-14:
 | ⚠️ Paid – no lien waiver lists only "TEST – Roof (paid, no waiver)" (empty before the fixture) | Pass |
 | ⚠️ Paid – no W-9 lists only "TEST – Paid vendor, no W-9" (empty before the fixture; the W-9 vendor and the unpaid COI test companies do not show) | Pass |
 | Rehab Variance = 5,100 matches the Project; Rehab Variance = 5,101 matches nothing | Pass |
-| Line Budgeted = Estimate, line Variance, Total and Acquisition Variance | Not verified: the workspace hit the Notion "Query Data Source" usage limit |
+| Line Budgeted = Estimate, line Variance, every Project roll-up and Variance, Companies Total Paid and Paid, No W-9 | Pass (checked by the user in the Notion UI) |
 
-The MCP returns `formulaResult://` and `rollupResult://` references instead of values, so the numbers were checked with filtered row queries. Look at **💰 Budget vs Actual** and **All Budget Lines** in the Notion UI to confirm the unverified rows. Delete the test records by hand when no longer needed.
+The MCP returns `formulaResult://` and `rollupResult://` references instead of values, so the numbers were checked with filtered row queries until the workspace hit the Notion "Query Data Source" usage limit, then in the Notion UI. Delete the test records by hand when no longer needed.
+
+## Manual steps (Notion UI)
+
+1. **Number formats on formulas and roll-ups.** The API cannot set them, so they show as plain numbers until set by hand (column header → Edit property → Number format → Dollar): Budgeted and Variance on Budget Lines; the six Variance formulas and the Budgeted and Actual roll-ups on Projects; Total Paid on Companies if it is not already in dollars. The hidden helper fields can stay plain.
 
 ## Not built yet
 
