@@ -42,6 +42,15 @@ Terms used in the REI Notion Operating System (see `REI-Notion-Operating-System-
 - **Below Criteria**: a scenario whose Fully loaded Net Profit is below its Buy Box's Min Net Profit or Min Profit % of ARV.
 - **Rental fields**: Market Rent, Actual Rent, Lease End, Tenant Name. They exist on Property but are hidden until rentals start.
 
+## Projects
+
+- **Budget Line**: one cost item of a Project in the Budget Lines database (for example "Roof" or "Purchase"), with an Estimate, a Budgeted and an Actual amount.
+- **Cost Group**: the top-level bucket of a Budget Line. Exactly one of: Acquisition, Rehab, Holding, Financing, Selling.
+- **Category**: the standard rehab bucket of a Rehab line (Demo, Roof, HVAC, Electrical, Plumbing, Kitchen, Bath, Flooring, Paint, Exterior, Permits, Contingency), so budgets compare between projects.
+- **Budgeted**: the formula amount of a Budget Line: the accepted bid amount if one exists, else the Estimate. Nobody types into it.
+- **Variance**: Budgeted − Actual. Negative means an overrun.
+- **Paid** line: a Budget Line whose Actual is more than 0. Paid lines need a lien waiver; their vendors need a W-9.
+
 ## CRM
 
 - **Contact**: one person in the Contacts database. A person with several **Roles** (for example Contractor and Hire Candidate) is still one Contact.

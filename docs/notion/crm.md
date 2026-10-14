@@ -31,6 +31,9 @@ One person with several roles is one Contact record with several Roles selected.
 | Status | select | Prospect, Vetted, Preferred, Do Not Use |
 | Rating | select | 1–5 |
 | Contacts | relation (synced from Contacts › Company) | |
+| Budget Lines | relation (synced from Budget Lines › Vendor) | |
+| Total Paid | roll-up (sum of Budget Lines › Actual) | Read-only |
+| Paid, No W-9 | formula (text) | Read-only; "Yes" when Total Paid > 0 and W-9 on File is unchecked |
 
 The spec does not list Trades or Rating values; the Trades list and the 1–5 Rating scale are starting choices and can be edited.
 
@@ -39,13 +42,13 @@ The spec does not list Trades or Rating values; the Trades list and the 1–5 Ra
 | Database | View | Purpose |
 |---|---|---|
 | Companies | ⚠️ COI expiring (30 days) | COI Expiration is set and on or before one month from today, sorted soonest first. Already-expired COIs also show, which is intended. |
+| Companies | ⚠️ Paid – no W-9 | `Paid, No W-9 = Yes`: vendors we paid (via Budget Lines) without a W-9 on file, for 1099s in January (#14) |
 
 The Notion view DSL only offers "one month from now" as a relative date, so "30 days" is approximated as one month.
 
 ## Not built yet
 
-- Relations from Bids, Budget Lines and Knowledge, added with those databases. Projects (Lender) was added in #12 and Tasks (External Party) in #13.
-- The "paid vendors with no W-9" view (needs Budget Lines).
+- Relations from Bids and Knowledge, added with those databases. Projects (Lender) was added in #12, Tasks (External Party) in #13 and Budget Lines (Vendor) in #14.
 
 ## Test records
 

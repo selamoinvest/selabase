@@ -23,6 +23,11 @@ Built for issue #12. Lives in the Databases page of the "REI Operating System" t
 | Hard money loan | Term | number | Months |
 | Deadlines | Next Deadline | formula (date) | Read-only |
 | Deadlines | Due in 14 Days | formula (text) | Read-only; "Yes" or "No" |
+| Budget | Budget Lines | relation → Budget Lines (two-way, synced as Budget Lines › Project) | |
+| Budget | Acquisition, Rehab, Holding, Financing, Selling, Total × Budgeted, Actual | roll-up (sum) | Read-only |
+| Budget | Acquisition, Rehab, Holding, Financing, Selling, Total × Variance | formula (number) | Read-only; Budgeted − Actual, negative means an overrun |
+
+How the budget roll-ups work is in `budget-lines.md`.
 
 The spec lists "Maturity Date" under the loan fields and "Loan Maturity Date" under the milestones. They are the same date, so there is one field, **Loan Maturity Date**.
 
@@ -44,6 +49,7 @@ A project shows if any of its dates is in the window, even when an earlier date 
 |---|---|---|
 | All Projects | table | Every project with type, phase, property, next deadline, closing and loan |
 | ⏰ Deadlines – next 14 days | table | Projects with any milestone or loan maturity in the next 14 days |
+| 💰 Budget vs Actual | table | Budgeted, Actual and Variance per Cost Group and in total (#14) |
 
 ## Test records
 
@@ -59,7 +65,7 @@ The Property's Projects field lists all three. The test records are dated relati
 
 ## Not built yet
 
-- Relations from Budget Lines, Bids and Knowledge (Tasks added in #13), and the budget roll-ups, added with those databases.
+- Relations from Bids and Knowledge, added with those databases (Tasks added in #13, Budget Lines and the budget roll-ups in #14).
 - A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.
 - The AI Operating Manual (database map, field dictionary, naming rules) does not yet list Projects; update it with the Under Contract procedure (#17).
