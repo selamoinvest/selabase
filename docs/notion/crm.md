@@ -44,7 +44,7 @@ The Notion view DSL only offers "one month from now" as a relative date, so "30 
 
 ## Not built yet
 
-- Relations from Bids, Budget Lines, Projects (Lender), Tasks (External Party) and Knowledge, added with those databases.
+- Relations from Bids, Budget Lines and Knowledge, added with those databases. Projects (Lender) was added in #12 and Tasks (External Party) in #13.
 - The "paid vendors with no W-9" view (needs Budget Lines).
 
 ## Test records

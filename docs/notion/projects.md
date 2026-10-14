@@ -59,7 +59,7 @@ The Property's Projects field lists all three. The test records are dated relati
 
 ## Not built yet
 
-- Relations from Budget Lines, Bids, Tasks and Knowledge, and the budget roll-ups, added with those databases.
+- Relations from Budget Lines, Bids and Knowledge (Tasks added in #13), and the budget roll-ups, added with those databases.
 - A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.
 - The AI Operating Manual (database map, field dictionary, naming rules) does not yet list Projects; update it with the Under Contract procedure (#17).

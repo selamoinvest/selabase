@@ -98,4 +98,4 @@ Claude creates new properties through the New Lead Intake procedure; see `ai-ope
 
 These depend on databases from later issues and are added with them:
 
-- Relations to Projects, Tasks and Knowledge
+- Relation to Knowledge (Projects added in #12, Tasks in #13)
