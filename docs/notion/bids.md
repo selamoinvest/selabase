@@ -69,7 +69,7 @@ Delete the test records by hand when no longer needed.
 
 ## Manual steps (Notion UI)
 
-1. **Number format.** Set Accepted Bid Amount on Budget Lines to Dollar if you show it (column header → Edit property → Number format → Dollar). Budgeted is already on the list in `budget-lines.md`.
+1. **Number format.** Set Accepted Bid Amount on Budget Lines to Dollar if you show it (column header → Edit property → Number format → Dollar). Budgeted is already on the list in `budget-lines.md`. Done by the user 2026-10-14.
 
 ## Not built yet
 

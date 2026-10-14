@@ -81,7 +81,7 @@ The MCP returns `formulaResult://` and `rollupResult://` references instead of v
 
 ## Manual steps (Notion UI)
 
-1. **Number formats on formulas and roll-ups.** The API cannot set them, so they show as plain numbers until set by hand (column header → Edit property → Number format → Dollar): Budgeted and Variance on Budget Lines; the six Variance formulas and the Budgeted and Actual roll-ups on Projects; Total Paid on Companies if it is not already in dollars. The hidden helper fields can stay plain.
+1. **Number formats on formulas and roll-ups.** The API cannot set them, so they show as plain numbers until set by hand (column header → Edit property → Number format → Dollar): Budgeted and Variance on Budget Lines; the six Variance formulas and the Budgeted and Actual roll-ups on Projects; Total Paid on Companies if it is not already in dollars. The hidden helper fields can stay plain. Done by the user 2026-10-14.
 
 ## Not built yet
 
