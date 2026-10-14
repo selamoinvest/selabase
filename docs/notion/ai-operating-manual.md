@@ -15,7 +15,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16). Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
 | 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task, Knowledge and TEST record titles |
-| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box. The other procedures are listed as coming |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty |
 
 ## New Lead Intake
