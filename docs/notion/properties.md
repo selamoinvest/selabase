@@ -88,7 +88,7 @@ Built for issue #8, all linked to Buy Box v1 and verified through the Formula ch
 | TEST – Buy Box Fit fixture A | Analyzing, 3 bd / 1 ba / 1,100 sq ft, Niche B; one scenario "TEST – Fixture A for Buy Box Fit (Selected, frozen)" with Fixture A inputs, Overrides frozen to the Defaults and Selected | Fails: Profit % (Fixture A's Net Profit of $36,400 is 11.4% of ARV, below 15%) |
 | TEST – Select fixtures A F3 (issue #7) | Two Selected scenarios | Check: more than one Selected |
 
-Since issue #11 these properties are linked to Buy Box v2 (Max Purchase Price $275,000), so the Price failures recorded above no longer apply: Fixture D (asking $260,000) now reads "Fails: Niche, Beds", and the others are unchanged. Fixture E (issue #11) is described in `ai-operating-manual.md`.
+Since issue #11 these properties are linked to Buy Box v2 (Max Purchase Price $275,000), so the Price failures recorded above no longer apply: Fixture D (asking $260,000) should now read "Fails: Niche, Beds" (not read back), and the others are unchanged. Fixture E (issue #11) is described in `ai-operating-manual.md`.
 
 Fixture A has its own property because the issue #7 property also holds the F3 second Selected scenario. A team member deletes these by hand when they are no longer needed.
 
