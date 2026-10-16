@@ -67,7 +67,7 @@ The Acquisitions page also has a linked Pipeline board.
 
 ## Board setting
 
-Both Pipeline boards (the database tab and the Acquisitions linked view) have **Hide empty groups** turned off, so all 10 stages show even when empty. The Notion MCP view DSL cannot set this, so it was done by hand in the Notion UI; boards created later through the MCP need the same step. The Home "Pipeline by Stage" board (#20) still needs it (`home.md`).
+Both Pipeline boards (the database tab and the Acquisitions linked view) have **Hide empty groups** turned off, so all 10 stages show even when empty. The Notion MCP view DSL cannot set this, so it was done by hand in the Notion UI; boards created later through the MCP need the same step. The Home "Pipeline by Stage" board (#20) has it too (done, `home.md`).
 
 ## Formula and roll-up filters (manual)
 

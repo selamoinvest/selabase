@@ -22,7 +22,7 @@ Home links the pillar and System pages, then shows the **Dashboard**: five linke
 
 ## Manual step
 
-- **Pipeline by Stage: turn off "Hide empty groups"** in the Notion UI (board ••• → Group → Hide empty groups), so all 10 stages show even when empty. The MCP view DSL cannot set it and created the board with empty groups hidden. Same step as the other Pipeline boards (`properties.md`).
+- **Pipeline by Stage: "Hide empty groups" is off**, so all 10 stages show even when empty. The MCP view DSL cannot set it and created the board with empty groups hidden, so a team member turned it off in the Notion UI (board ••• → Group → Hide empty groups). Done on 2026-10-16; the view now returns `hideEmptyGroups: false`. Same step as the other Pipeline boards (`properties.md`).
 
 ## Test
 
