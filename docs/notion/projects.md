@@ -62,7 +62,7 @@ Fixture for issue #12, all linked to "TEST – 4521 Fixture Ave" (checked 2026-1
 | TEST – 4521 Fixture – Flip Rehab – 2026-10 (30 days) | Inspection 2026-11-13 | No |
 | TEST – 4521 Fixture – Flip Rehab – 2026-10 (loan maturity in 5 days) | Loan Maturity 2026-10-19, EMD 2026-09-01 (past) | Yes |
 
-The Property's Projects field lists all three. The test records are dated relative to 2026-10-14; the 14-day view will stop showing them as time passes. Delete by hand when no longer needed.
+The Property's Projects field lists all three. Issue #20 added a fourth, "TEST – 4521 Fixture – Flip Rehab – 2026-10 (closed out)" (Phase Closed Out, no dates), to check the Home "Active projects" view leaves it out. The test records are dated relative to 2026-10-14; the 14-day view will stop showing them as time passes. Delete by hand when no longer needed.
 
 ## Relations added by later issues
 
@@ -70,5 +70,5 @@ Tasks were added in #13, Budget Lines and the budget roll-ups in #14, Bids in #1
 
 ## Not built yet
 
-- A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
+- A Projects linked view on the Projects pillar page. The Home "Deadlines" and "Active projects" views were added in #20 (`home.md`).
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.

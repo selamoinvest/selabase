@@ -45,4 +45,4 @@ The Property's Tasks field and the Project's Tasks field each list all three. De
 ## Not built yet
 
 - **Recurring tasks** (manual): the Notion MCP cannot create database templates or set their repeat schedule. A team member makes each recurring task a template in the Notion UI (New ▾ → New template) and sets "Repeat" on it. Claude does not recreate recurring tasks.
-- Tasks linked views on Home and each pillar page.
+- Tasks linked views on each pillar page. The Home My Tasks view was added in #20 (`home.md`).

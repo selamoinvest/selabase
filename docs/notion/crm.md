@@ -54,3 +54,5 @@ Projects (Lender) was added in #12, Tasks (External Party) in #13, Budget Lines 
 ## Test records
 
 Records titled "TEST –" in both databases (Fixture H, part 1: a company with COI 20 days out, a company 90 days out that must not appear, and a Contact with two roles). Delete by hand when no longer needed.
+
+The 20-day company's COI Expiration was moved to 2026-11-05 on 2026-10-16 for the Home check (#20). It is no longer 20 days out after that date passes, so move it again before a later Fixture H check. The Home page has a linked copy of the COI view (`home.md`).
