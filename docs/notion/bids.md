@@ -71,8 +71,12 @@ Delete the test records by hand when no longer needed.
 
 1. **Number format.** Set Accepted Bid Amount on Budget Lines to Dollar if you show it (column header → Edit property → Number format → Dollar). Budgeted is already on the list in `budget-lines.md`. Done by the user 2026-10-14.
 
+## Comparing bids
+
+Asking Claude to "compare the bids" for one trade on a Project runs the **Compare Bids** procedure in the AI Operating Manual (#19, user story 52). Claude collects every bid for the trade from the Project, marks each scope item included / excluded / not mentioned per bid, points out the scope differences and outstanding bids, and warns when the bids sit on the "Rehab – lump" line. It changes no Status unless the team member names the bid to accept. Fixture J checked it (see the Manual's fixtures).
+
+Write a Scope Summary that names what is in and what is out (rooms, permit, patching, paint, warranty): the comparison is only as good as the scopes.
+
 ## Not built yet
 
-- The Compare Bids procedure (user story 52): Claude compares bids for one trade and points out scope differences. It belongs in the AI Operating Manual.
 - A Bids linked view on the Projects pillar page and on each Project page.
-- The AI Operating Manual (database map, field dictionary) does not yet list Bids.

@@ -15,7 +15,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16) and Projects, Budget Lines, Bids and Tasks (#17). Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
 | 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project (short address and month defined in #17), Task, Budget Line, Bid, Knowledge and TEST record titles |
-| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge, Under Contract, Process Meeting Notes. The other procedures are listed as coming |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge, Under Contract, Process Meeting Notes, Compare Bids. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty, including the Budget Lines and W-9 views (#17), plus a pointer to the 14-day deadlines view |
 
 ## New Lead Intake
@@ -90,13 +90,27 @@ Why the note is found by query, not search: in the red run, search did not retur
 
 Why the link is written on the note: Tasks › Knowledge is the synced side (rule 3, "set from the Knowledge side"). Writing a relation replaces the whole list, so step 7 keeps the tasks already linked.
 
+## Compare Bids (issue #19)
+
+1. Find the Project and the trade (one listed Trade value; ask if none was given).
+2. Collect every bid for the trade by fetching the Project's Bids and then each bid; every Status counts, bids on other Projects do not.
+3. Read Amount, Status, Scope Summary, Company, Budget Line and the Quote PDF if readable; an empty scope is reported as unknown, a Requested bid as outstanding.
+4. Compare scope: every item any bid mentions, marked included / excluded / not mentioned per bid, then the differences in words; differing scopes mean the amounts are not directly comparable.
+5. Check the context: which Budget Line and Estimate (warn when the bids sit on "Rehab – lump", since accepting one replaces the lump's Budgeted), an already Accepted bid, and each Company's Do Not Use, COI and W-9.
+6. Report a table, the differences, outstanding bids and checks; a suggested pick is allowed, labelled as a suggestion.
+7. Write nothing. Status changes only when the team member names the bid to accept; others go to Rejected only when asked. Then check "⚠️ More than one Accepted bid" is empty.
+
+Why bids are read by fetch, not query: rows queries count toward the workspace limit (it was used up while building Fixture J), and search can miss a bid made minutes ago. The Project's synced Bids field lists every bid, and fetch has no limit.
+
+Why "which one should we go with" writes nothing: it asks for advice. The acceptance criterion is no Status change without an explicit request, so only naming the bid to accept counts.
+
 ## Pinning (manual)
 
 The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
-All eleven databases are on the page (Projects, Budget Lines, Bids and Tasks were added with #17). Later issues extend it with procedures (Compare Bids in #19, Migration in #21; Process Meeting Notes was added with #18). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+All eleven databases are on the page (Projects, Budget Lines, Bids and Tasks were added with #17). Later issues extend it with procedures (Migration in #21; Process Meeting Notes was added with #18 and Compare Bids with #19). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 
@@ -115,6 +129,8 @@ Each fixture was run by a fresh agent that got only the team member's request an
 | Process Meeting Notes, Fixture G red (#18) | "Process meeting notes: TEST – 2026-10-16 – Fixture G walkthrough debrief 500 Fixture F", before the procedure was on the page | Red as expected. Claude wrote nothing and asked how to proceed, since the procedure was listed as coming. Its search did not find the note, made a minute earlier |
 | Process Meeting Notes, Fixture G (#18) | Same request, after the procedure was added. The note has five to-dos: "Roofer quote, need it by 2026-10-23 – urgent"; "Sam to call the city about the occupancy inspection – priority: critical" (Sam is not a workspace member); "Panel replacement price from TEST – Multi-role person"; "Confirm title commitment" (already a Fixture F task); one ticked and marked done. Plus a decision and observations | Passed. Two tasks created, verb-first: "TEST – Get roofer quote" (Not Started, High from "urgent", due 2026-10-23) and "TEST – Get panel replacement price" (Not Started, External Party TEST – Multi-role person, no Priority). Both linked to the Property and Project. The occupancy and title items were linked to the existing Fixture F tasks instead of duplicated. The done item, the decision and the observations were skipped and listed. "Critical" was not written: Claude asked, and asked about Sam. Checked afterwards: a Tasks rows query on Knowledge = the note returns exactly the four tasks; the note body is unchanged; Priority still has exactly High, Medium, Low and Status its five options |
 | Process Meeting Notes, Fixture G re-run (#18) | Same request again, by another fresh agent | Passed. No writes: each action item matched a task already linked to the note, and the note's Tasks list was left as it was |
+| Compare Bids, Fixture J red (#19) | "Compare the electrical bids on TEST – 500 Fixture F – Flip Rehab – 2026-10 and tell me which one to go with.", before the procedure was on the page | Red as expected. Claude wrote nothing, said the procedure was listed as coming and asked how to proceed (it still listed the bids) |
+| Compare Bids, Fixture J (#19) | Same request, after the procedure was added. The Fixture F Project has four Electrical bids on "TEST – Rehab – lump": Budget Wiring $5,900 (kitchen only, no permit, meter base not mentioned, patch and paint), Sparky Electric $8,400 (meter base, kitchen and baths, permit, no patching or paint), Volt Pros $9,750 (full house, detectors, permit, patching, warranty, no paint), Late Electric (Requested, no amount or scope). Distractors: a Plumbing bid on the same Project and an Electrical bid on another Project | Passed. The comparison covered all four Electrical bids and neither distractor. It marked each scope item included / excluded / not mentioned per bid, said the amounts are not directly comparable, listed Late Electric as outstanding, warned that accepting on the lump line would replace its $35,000 Budgeted, and noted the companies have no Status, COI or W-9. It suggested Volt Pros as a suggestion and asked what to do. No writes: fetched afterwards, the three quoted bids are still Received and Late Electric still Requested |
 
 Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
 
@@ -131,3 +147,5 @@ Issue #11 added "TEST – Fixture E lead price fail, St. Louis, MO 63110" and "T
 Issue #17 added, in Properties, "TEST – 500 Fixture F St, St. Louis, MO 63110" (https://app.notion.com/p/3fb226043a8b8126afc6de36a81e52cd, now Under Contract); in Underwriting, "TEST – Fixture F (Fixture A inputs, Selected, frozen)"; in Projects, "TEST – 500 Fixture F – Flip Rehab – 2026-10" (https://app.notion.com/p/3fb226043a8b815c9a54deb651888ad7); its eight "TEST –" Budget Lines and seven "TEST –" Tasks. The property and scenario were set up by hand as the fixture (Fixture A inputs and the frozen Overrides), because Fixture A itself is no longer Selected after #10. Delete by hand.
 
 Issue #18 added, in Knowledge, "TEST – 2026-10-16 – Fixture G walkthrough debrief 500 Fixture F" (https://app.notion.com/p/3fb226043a8b81eea701ff69fda83970), linked to the Fixture F property, project and "TEST – Multi-role person", and in Tasks "TEST – Get roofer quote" (https://app.notion.com/p/3fb226043a8b81a8ac65ec190149520e) and "TEST – Get panel replacement price" (https://app.notion.com/p/3fb226043a8b81e3a2c5d3ba8280bb67). The note also links the Fixture F tasks "TEST – Check municipal occupancy inspection requirements" and "TEST – Confirm title commitment". Delete by hand.
+
+Issue #19 added, in Companies, "TEST – Fixture J Sparky Electric", "TEST – Fixture J Budget Wiring", "TEST – Fixture J Volt Pros", "TEST – Fixture J Late Electric" and "TEST – Fixture J Pipe Co"; in Bids, "TEST – Electrical – Fixture J Sparky Electric" (https://app.notion.com/p/3fb226043a8b81a29d10f78f8d3a83c7), "TEST – Electrical – Fixture J Budget Wiring" (https://app.notion.com/p/3fb226043a8b81af9e7bd16d960df006), "TEST – Electrical – Fixture J Volt Pros" (https://app.notion.com/p/3fb226043a8b81cabba7df9ebf1b568f), "TEST – Electrical – Fixture J Late Electric" (https://app.notion.com/p/3fb226043a8b815e83a9ffb5bc76f79a) and "TEST – Plumbing – Fixture J Pipe Co", all on the Fixture F Project's "TEST – Rehab – lump" line, plus "TEST – Electrical – Fixture J Sparky Electric (other project)" on "TEST – 4521 Fixture – Flip Rehab – 2026-10 (30 days)" with no Budget Line. None is Accepted, so the Fixture F totals are unchanged. Delete by hand.
