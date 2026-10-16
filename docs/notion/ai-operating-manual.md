@@ -15,7 +15,7 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16) and Projects, Budget Lines, Bids and Tasks (#17). Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
 | 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project (short address and month defined in #17), Task, Budget Line, Bid, Knowledge and TEST record titles |
-| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge, Under Contract. The other procedures are listed as coming |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge, Under Contract, Process Meeting Notes. The other procedures are listed as coming |
 | 7 | Data-quality views | The views that should be empty, including the Budget Lines and W-9 views (#17), plus a pointer to the 14-day deadlines view |
 
 ## New Lead Intake
@@ -74,13 +74,29 @@ Why amounts are calculated by hand: the MCP returns formula values as `formulaRe
 
 Why a Rehab lump: the spec splits Rehab into categories later, as bids arrive (Fixture F2 splits a Roof line out of it).
 
+## Process Meeting Notes (issue #18)
+
+1. Find the note by a rows query on Knowledge (Type = Meeting Note, Title contains); ask on no match or several.
+2. Read the page body and the Drive file in Source, if any; note its Date and links.
+3. Pick out the action items; skip decisions, observations and items marked done, and list them.
+4. Do not duplicate: an open task on the note, its Property or its Project that covers the item is linked instead.
+5. Fill in each new task with listed values only: verb-first title ("TEST – " for a TEST note), Status Not Started, Priority only if the note gives one (urgent/ASAP → High; any other word is left empty and asked about), Due Date only from the note, Owner only a workspace member, External Party only an existing Contact, Property and Project from the note.
+6. Create the tasks.
+7. Set the note's Tasks to the old list plus the new and existing tasks, then fetch the note to check.
+8. Leave the note itself unchanged.
+9. Report the tasks, the existing tasks linked, the skipped items and the questions.
+
+Why the note is found by query, not search: in the red run, search did not return a note created a minute earlier.
+
+Why the link is written on the note: Tasks › Knowledge is the synced side (rule 3, "set from the Knowledge side"). Writing a relation replaces the whole list, so step 7 keeps the tasks already linked.
+
 ## Pinning (manual)
 
 The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
-All eleven databases are on the page (Projects, Budget Lines, Bids and Tasks were added with #17). Later issues extend it with procedures (Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+All eleven databases are on the page (Projects, Budget Lines, Bids and Tasks were added with #17). Later issues extend it with procedures (Compare Bids in #19, Migration in #21; Process Meeting Notes was added with #18). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 
@@ -96,6 +112,9 @@ Each fixture was run by a fresh agent that got only the team member's request an
 | Select Scenario, F3 yes path (#10) | Team member approved unticking Fixture A | Passed, but run by the main session, not a fresh agent: the fresh agent refused a yes relayed by another agent, as rule 4 intends. Fixture A unticked with its eight Overrides unchanged. F3's eight Overrides read back 0.03, 0.08, 0.12, 0.02, 6, 0, 0.7, 1 and Selected is ticked. "⚠️ More than one Selected" is empty. Buy Box Fit on the property reads "Fails: Profit %" (F3 Net Profit 47,260 by hand, 14.8% of ARV, under 15%). The Query Data Source limit blocked reading Net Profit and Below Criteria directly, so those two are hand-calculated and Buy Box Fit is the only formula value confirmed |
 | Update Buy Box, Fixture E (#11) | Run by the main session, not a fresh agent. Team member chose "move all 7" (8 pre-contract properties, 7 scenarios) | Passed. v2 – Oct 2026 created with Max Purchase Price $275,000 and the other v1 criteria, Active ticked, v1 unticked (exactly one Active). "TEST – Fixture E lead price fail" (Lead, asking $265,000) moved to v2 and now reads "Fits (physical) – not underwritten" (it failed Price on v1). "TEST – Fixture E passed stays on v1" (Passed, Pass Reason Price) stays on v1 and still fails Price. v1 lists only that property. "New scenario" template points at v2 |
 | Under Contract, Fixture F (#17) | "TEST – 500 Fixture F St, St. Louis, MO 63110 is under contract" (dates given when asked: EMD 2026-10-19, inspection 2026-10-26, financing 2026-11-06, closing 2026-11-20). Run by the main session, not a fresh agent | Passed. Step 3 check returned the scenario (Total Project Cost 258,000, Selling Costs 25,600). Stage is Under Contract. One Project, "TEST – 500 Fixture F – Flip Rehab – 2026-10", Type Flip Rehab, Phase Due Diligence, four dates set. Eight Budget Lines: 200,000 / 6,000 / 35,000 / 0 / 3,000 / 3,500 / 10,500 / 25,600. A rows query on the Project returned it with Total Variance 283,600, Acquisition 206,000, Rehab 35,000 and Financing 14,000 (Actual is empty, so Variance equals Budgeted); the same query with 283,601 returned nothing. Seven Tasks linked to both the Project and the Property; Deposit EMD due 2026-10-19, Order inspection due 2026-10-26 |
+| Process Meeting Notes, Fixture G red (#18) | "Process meeting notes: TEST – 2026-10-16 – Fixture G walkthrough debrief 500 Fixture F", before the procedure was on the page | Red as expected. Claude wrote nothing and asked how to proceed, since the procedure was listed as coming. Its search did not find the note, made a minute earlier |
+| Process Meeting Notes, Fixture G (#18) | Same request, after the procedure was added. The note has five to-dos: "Roofer quote, need it by 2026-10-23 – urgent"; "Sam to call the city about the occupancy inspection – priority: critical" (Sam is not a workspace member); "Panel replacement price from TEST – Multi-role person"; "Confirm title commitment" (already a Fixture F task); one ticked and marked done. Plus a decision and observations | Passed. Two tasks created, verb-first: "TEST – Get roofer quote" (Not Started, High from "urgent", due 2026-10-23) and "TEST – Get panel replacement price" (Not Started, External Party TEST – Multi-role person, no Priority). Both linked to the Property and Project. The occupancy and title items were linked to the existing Fixture F tasks instead of duplicated. The done item, the decision and the observations were skipped and listed. "Critical" was not written: Claude asked, and asked about Sam. Checked afterwards: a Tasks rows query on Knowledge = the note returns exactly the four tasks; the note body is unchanged; Priority still has exactly High, Medium, Low and Status its five options |
+| Process Meeting Notes, Fixture G re-run (#18) | Same request again, by another fresh agent | Passed. No writes: each action item matched a task already linked to the note, and the note's Tasks list was left as it was |
 
 Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
 
@@ -110,3 +129,5 @@ After the yes-path run, "TEST – Select fixtures A F3" has Fixture F3 Selected 
 Issue #11 added "TEST – Fixture E lead price fail, St. Louis, MO 63110" and "TEST – Fixture E passed stays on v1, St. Louis, MO 63110" in Properties. Delete by hand.
 
 Issue #17 added, in Properties, "TEST – 500 Fixture F St, St. Louis, MO 63110" (https://app.notion.com/p/3fb226043a8b8126afc6de36a81e52cd, now Under Contract); in Underwriting, "TEST – Fixture F (Fixture A inputs, Selected, frozen)"; in Projects, "TEST – 500 Fixture F – Flip Rehab – 2026-10" (https://app.notion.com/p/3fb226043a8b815c9a54deb651888ad7); its eight "TEST –" Budget Lines and seven "TEST –" Tasks. The property and scenario were set up by hand as the fixture (Fixture A inputs and the frozen Overrides), because Fixture A itself is no longer Selected after #10. Delete by hand.
+
+Issue #18 added, in Knowledge, "TEST – 2026-10-16 – Fixture G walkthrough debrief 500 Fixture F" (https://app.notion.com/p/3fb226043a8b81eea701ff69fda83970), linked to the Fixture F property, project and "TEST – Multi-role person", and in Tasks "TEST – Get roofer quote" (https://app.notion.com/p/3fb226043a8b81a8ac65ec190149520e) and "TEST – Get panel replacement price" (https://app.notion.com/p/3fb226043a8b81e3a2c5d3ba8280bb67). The note also links the Fixture F tasks "TEST – Check municipal occupancy inspection requirements" and "TEST – Confirm title commitment". Delete by hand.
