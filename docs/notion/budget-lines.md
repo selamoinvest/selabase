@@ -85,6 +85,5 @@ The MCP returns `formulaResult://` and `rollupResult://` references instead of v
 
 ## Not built yet
 
-- The Under Contract procedure (#17) creates the starting Budget Lines from the Selected scenario.
+- The Under Contract procedure (#17, in the AI Operating Manual) creates the starting eight Budget Lines from the Selected scenario.
 - Budget Lines linked views on the Projects pillar page and on each Project page.
-- The AI Operating Manual (database map, field dictionary) does not yet list Budget Lines; update it with the Under Contract procedure (#17).

@@ -11,12 +11,12 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 | # | Section | Holds |
 |---|---|---|
 | 1 | Rules | Never delete or archive; never create a new select option; write inputs only; never change a Selected scenario's numbers without approval; do not change the schema; ask when unsure; run procedures only when asked |
-| 2 | Database map | The seven databases built so far (Knowledge added in #16), what one record is, and every relation with its synced side; the current Active Assumptions and Buy Box records |
-| 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16). Formula, roll-up and synced fields are marked read-only |
+| 2 | Database map | All eleven databases (Projects, Budget Lines, Bids and Tasks listed with #17, Knowledge in #16), what one record is, and every relation with its synced side; the current Active Assumptions and Buy Box records |
+| 3 | Field dictionary | Every field, its type and the exact allowed values, per database, including Knowledge and the glossary pointer (#16) and Projects, Budget Lines, Bids and Tasks (#17). Formula, roll-up and synced fields are marked read-only |
 | 4 | Formulas | What each Underwriting result and Buy Box Fit means, and how to read formula values through the MCP |
-| 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project, Task, Knowledge and TEST record titles |
-| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge. The other procedures are listed as coming |
-| 7 | Data-quality views | The views that should be empty |
+| 5 | Naming rules | Property, scenario, Buy Box version, Contact, Company, Project (short address and month defined in #17), Task, Budget Line, Bid, Knowledge and TEST record titles |
+| 6 | Procedures | New Lead Intake, Analyze Property, Select Scenario, Update Buy Box, Answer from Knowledge, Under Contract. The other procedures are listed as coming |
+| 7 | Data-quality views | The views that should be empty, including the Budget Lines and W-9 views (#17), plus a pointer to the 14-day deadlines view |
 
 ## New Lead Intake
 
@@ -58,13 +58,29 @@ Claude reads it before it writes anything in the teamspace. The Notion page is t
 
 Moving a scenario's Buy Box (step 7) is a choice made here, so Below Criteria reads the same criteria as Buy Box Fit. It changes no input or Override.
 
+## Under Contract (issue #17)
+
+1. Find the Property; stop and ask if its Stage is Under Contract or later, or if it already has a Project that is not Terminated.
+2. Find the one Selected scenario; stop if there is none, more than one, or any Override is empty (not frozen).
+3. Calculate the eight line amounts from the scenario's inputs and Overrides (rounded to cents), then check them against Notion before writing: a rows query with Total Project Cost and Selling Costs `number_equals` filters must return the scenario. The formulas do not round, so on a miss the query is repeated with a ±0.01 range before Claude stops.
+4. Set Stage = Under Contract.
+5. Create the Project: "[short address] – [Type] – [YYYY-MM]", Type from Exit Strategy (Flip → Flip Rehab), Phase = Due Diligence, Property linked. Lender and loan fields stay empty.
+6. Create the eight Budget Lines with the amount in Estimate: Purchase and Buy Closing (Acquisition); Rehab – lump and Contingency (Rehab, Category Contingency on the second); Holding (Holding); Points and Interest (Financing); Selling Costs (Selling). A 0 line is still written.
+7. Create the seven due-diligence Tasks (Not Started, High, Property and Project linked).
+8. Ask for the contract dates and write them to the Project; Deposit EMD is due on EMD Due and Order inspection on Inspection Deadline.
+9. Report the links, the lines and their total (= ARV − Net Profit), the tasks, the dates and what is still empty.
+
+Why amounts are calculated by hand: the MCP returns formula values as `formulaResult://` references, so Claude cannot copy Buy Closing, Points, Interest etc. from the scenario. A Selected scenario is frozen, so its Overrides hold every assumption as a plain number and the hand calculation uses exactly what the formulas use. The rows query in step 3 makes Notion confirm the result before anything is written.
+
+Why a Rehab lump: the spec splits Rehab into categories later, as bids arrive (Fixture F2 splits a Roof line out of it).
+
 ## Pinning (manual)
 
 The Notion MCP cannot pin or reorder sidebar pages, so a team member pinned it in the Notion UI (done). The page sits at the top level of the teamspace and is linked from Home.
 
 ## Keeping it current
 
-Later issues extend the page when they add databases (Projects, Budget Lines, Bids, Tasks; Knowledge was added in #16) and procedures (Under Contract in #17, Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
+All eleven databases are on the page (Projects, Budget Lines, Bids and Tasks were added with #17). Later issues extend it with procedures (Process Meeting Notes in #18, Compare Bids in #19, Migration in #21). When an Active Assumptions record or Buy Box version changes, update the "Current Active records" line in section 2.
 
 ## Fixtures
 
@@ -79,6 +95,7 @@ Each fixture was run by a fresh agent that got only the team member's request an
 | Select Scenario, F3 part 2 (#10) | "Select this scenario: TEST – Fixture F3 (second Selected, ticked by hand)" | Passed. Claude wrote nothing and asked before unticking Fixture A, noting that A holds agreed numbers, that the property showed "Check: more than one Selected", and what it would do after a yes. Then, after the team member's yes, the yes path was run (see the next row) |
 | Select Scenario, F3 yes path (#10) | Team member approved unticking Fixture A | Passed, but run by the main session, not a fresh agent: the fresh agent refused a yes relayed by another agent, as rule 4 intends. Fixture A unticked with its eight Overrides unchanged. F3's eight Overrides read back 0.03, 0.08, 0.12, 0.02, 6, 0, 0.7, 1 and Selected is ticked. "⚠️ More than one Selected" is empty. Buy Box Fit on the property reads "Fails: Profit %" (F3 Net Profit 47,260 by hand, 14.8% of ARV, under 15%). The Query Data Source limit blocked reading Net Profit and Below Criteria directly, so those two are hand-calculated and Buy Box Fit is the only formula value confirmed |
 | Update Buy Box, Fixture E (#11) | Run by the main session, not a fresh agent. Team member chose "move all 7" (8 pre-contract properties, 7 scenarios) | Passed. v2 – Oct 2026 created with Max Purchase Price $275,000 and the other v1 criteria, Active ticked, v1 unticked (exactly one Active). "TEST – Fixture E lead price fail" (Lead, asking $265,000) moved to v2 and now reads "Fits (physical) – not underwritten" (it failed Price on v1). "TEST – Fixture E passed stays on v1" (Passed, Pass Reason Price) stays on v1 and still fails Price. v1 lists only that property. "New scenario" template points at v2 |
+| Under Contract, Fixture F (#17) | "TEST – 500 Fixture F St, St. Louis, MO 63110 is under contract" (dates given when asked: EMD 2026-10-19, inspection 2026-10-26, financing 2026-11-06, closing 2026-11-20). Run by the main session, not a fresh agent | Passed. Step 3 check returned the scenario (Total Project Cost 258,000, Selling Costs 25,600). Stage is Under Contract. One Project, "TEST – 500 Fixture F – Flip Rehab – 2026-10", Type Flip Rehab, Phase Due Diligence, four dates set. Eight Budget Lines: 200,000 / 6,000 / 35,000 / 0 / 3,000 / 3,500 / 10,500 / 25,600. A rows query on the Project returned it with Total Variance 283,600, Acquisition 206,000, Rehab 35,000 and Financing 14,000 (Actual is empty, so Variance equals Budgeted); the same query with 283,601 returned nothing. Seven Tasks linked to both the Project and the Property; Deposit EMD due 2026-10-19, Order inspection due 2026-10-26 |
 
 Buy Box Fit on the new lead was not read back (it should show "Fits (physical) – not underwritten", the same inputs as Fixture D2).
 
@@ -91,3 +108,5 @@ Issue #10 fixtures added "TEST – Flip – base case" (https://app.notion.com/p
 After the yes-path run, "TEST – Select fixtures A F3" has Fixture F3 Selected and frozen, and Fixture A unselected. The "🧪 Formula check (Claude)" view filter is now `Buy Box Fit = "Fails: Profit %"`.
 
 Issue #11 added "TEST – Fixture E lead price fail, St. Louis, MO 63110" and "TEST – Fixture E passed stays on v1, St. Louis, MO 63110" in Properties. Delete by hand.
+
+Issue #17 added, in Properties, "TEST – 500 Fixture F St, St. Louis, MO 63110" (https://app.notion.com/p/3fb226043a8b8126afc6de36a81e52cd, now Under Contract); in Underwriting, "TEST – Fixture F (Fixture A inputs, Selected, frozen)"; in Projects, "TEST – 500 Fixture F – Flip Rehab – 2026-10" (https://app.notion.com/p/3fb226043a8b815c9a54deb651888ad7); its eight "TEST –" Budget Lines and seven "TEST –" Tasks. The property and scenario were set up by hand as the fixture (Fixture A inputs and the frozen Overrides), because Fixture A itself is no longer Selected after #10. Delete by hand.

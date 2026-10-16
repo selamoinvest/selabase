@@ -72,4 +72,3 @@ Tasks were added in #13, Budget Lines and the budget roll-ups in #14, Bids in #1
 
 - A Projects linked view on the Projects pillar page, and the Home "Deadlines" and "Active projects" views.
 - The Notion MCP cannot confirm formula values directly (it returns `formulaResult://` references), so the fixtures were checked through the view's membership.
-- The AI Operating Manual (database map, field dictionary, naming rules) does not yet list Projects; update it with the Under Contract procedure (#17).
